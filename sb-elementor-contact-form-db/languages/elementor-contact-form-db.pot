@@ -1,0 +1,229 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Elementor Contact Form DB\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-07-26 13:31+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: \n"
+"Language: \n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Loco-Version: 2.6.2; wp-6.0.1\n"
+"X-Domain: elementor-contact-form-db"
+
+#. Description of the plugin
+msgid ""
+"A simple plugin to save contact form submissions in the database, designed "
+"for the Elementor Form Module"
+msgstr ""
+
+#: sb_elementor_contact_form_db.php:838
+msgid "Actions"
+msgstr ""
+
+#: sb_elementor_contact_form_db.php:888
+msgid "Add New"
+msgstr ""
+
+#: sb_elementor_contact_form_db.php:892
+msgid "All"
+msgstr ""
+
+#: sb_elementor_contact_form_db.php:194
+msgid "By form_id (additional options in the form module)"
+msgstr ""
+
+#: sb_elementor_contact_form_db.php:180
+msgid "By Page Submitted"
+msgstr ""
+
+#: sb_elementor_contact_form_db.php:797
+msgid "Copy to another Post Type"
+msgstr ""
+
+#: sb_elementor_contact_form_db.php:228
+msgid "CSV Content (by Form ID)"
+msgstr ""
+
+#: sb_elementor_contact_form_db.php:214
+msgid "CSV Content (by Submitted Page)"
+msgstr ""
+
+#: sb_elementor_contact_form_db.php:170
+msgid "Data Structure Updated. Refresh the page for a faster interface"
+msgstr ""
+
+#: sb_elementor_contact_form_db.php:837
+msgid "Date Cloned"
+msgstr ""
+
+#: sb_elementor_contact_form_db.php:280
+msgid "Disable Admin Nag?"
+msgstr ""
+
+#: sb_elementor_contact_form_db.php:890
+msgid "Edit"
+msgstr ""
+
+#: sb_elementor_contact_form_db.php:633
+msgid "Edit Page"
+msgstr ""
+
+#. Name of the plugin
+msgid "Elementor Contact Form DB"
+msgstr ""
+
+#: sb_elementor_contact_form_db.php:887
+msgctxt "Elementor DB"
+msgid "Add New"
+msgstr ""
+
+#: sb_elementor_contact_form_db.php:901
+msgid "For storing Elementor contact form submissions."
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://webacetechs.in"
+msgstr ""
+
+#. URI of the plugin
+msgid ""
+"https://www.sean-barton.co.uk/2017/04/elementor-contact-form-db-free-plugin/"
+msgstr ""
+
+#: sb_elementor_contact_form_db.php:296
+msgid "Minimum role to view records"
+msgstr ""
+
+#: sb_elementor_contact_form_db.php:889
+msgid "New"
+msgstr ""
+
+#: sb_elementor_contact_form_db.php:835
+msgid "New Post Title"
+msgstr ""
+
+#: sb_elementor_contact_form_db.php:896
+msgid "No contact form submissions found in Trash."
+msgstr ""
+
+#: sb_elementor_contact_form_db.php:895
+msgid "No contact form submissions found."
+msgstr ""
+
+#: sb_elementor_contact_form_db.php:665
+msgid "Not a registered user"
+msgstr ""
+
+#: sb_elementor_contact_form_db.php:755
+msgid "Oops something went wrong. This error message may be helpful:"
+msgstr ""
+
+#: sb_elementor_contact_form_db.php:653
+msgid "Other submissions made by the same person"
+msgstr ""
+
+#: sb_elementor_contact_form_db.php:894
+msgid "Parent:"
+msgstr ""
+
+#: sb_elementor_contact_form_db.php:215 sb_elementor_contact_form_db.php:229
+msgid ""
+"Please review the data below and press \"Download CSV File\" to start the "
+"download. This list will show up to 50 submissions. The export will show the "
+"full list."
+msgstr ""
+
+#: sb_elementor_contact_form_db.php:836
+msgid "Post Type"
+msgstr ""
+
+#: sb_elementor_contact_form_db.php:879
+msgctxt "post type singular name"
+msgid "Elementor DB"
+msgstr ""
+
+#: sb_elementor_contact_form_db.php:893
+msgid "Search"
+msgstr ""
+
+#: sb_elementor_contact_form_db.php:808
+msgid "Select Field Mappings:"
+msgstr ""
+
+#: sb_elementor_contact_form_db.php:264
+msgid "Settings saved successfully"
+msgstr ""
+
+#: sb_elementor_contact_form_db.php:742
+msgid ""
+"Successfully copied the content of this contact form submission to another "
+"post type. Click here to"
+msgstr ""
+
+#: sb_elementor_contact_form_db.php:285
+msgid ""
+"The admin nag is the red box that shows at the top of your admin pages when "
+"there is a contact submission to review. If you would prefer to use the "
+"plugin as a backup only then just check this box to turn the nag off.."
+msgstr ""
+
+#: sb_elementor_contact_form_db.php:298
+msgid ""
+"The minimum role needed to export the records. Normally administrator but "
+"some sites may use editor or other roles. Note that this settings page is "
+"only ever usable by administrators."
+msgstr ""
+
+#: sb_elementor_contact_form_db.php:304
+msgid "The name of the menu item to show. Good for white labelling for clients"
+msgstr ""
+
+#: sb_elementor_contact_form_db.php:310
+msgid ""
+"The secondary (singular) name of the post type to show. Good for white "
+"labelling for clients"
+msgstr ""
+
+#: sb_elementor_contact_form_db.php:239
+msgid ""
+"This page will show a form when you have at least one submission. Until then,"
+" enjoy this picture of a cat!"
+msgstr ""
+
+#: sb_elementor_contact_form_db.php:273
+msgid ""
+"This simple form will provide some handy switches and settings for the "
+"plugin."
+msgstr ""
+
+#: sb_elementor_contact_form_db.php:139
+msgid ""
+"Use this simple form to export your contact data to CSV file. This is fairly "
+"crude but we don\\'t have names for forms but we do have the page it was "
+"submitted from. Elementor has the facility to give a form an ID (in the "
+"additional tab of the builder). If set then you can also export by Form ID "
+"which is perhaps more useful!"
+msgstr ""
+
+#: sb_elementor_contact_form_db.php:891
+msgid "View"
+msgstr ""
+
+#: sb_elementor_contact_form_db.php:640
+msgid "View User Profiile"
+msgstr ""
+
+#. Author of the plugin
+msgid "Web Ace Tech Services"
+msgstr ""
+
+#: sb_elementor_contact_form_db.php:761
+msgid ""
+"You need to choose at least one field to map against for the clone to work."
+msgstr ""
