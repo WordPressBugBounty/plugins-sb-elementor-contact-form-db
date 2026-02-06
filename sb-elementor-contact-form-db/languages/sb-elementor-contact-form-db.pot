@@ -1,0 +1,982 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: FormsDB for Elementor Forms\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-12-29 11:16+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: \n"
+"Language: \n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Loco-Version: 2.8.0; wp-6.9; php-8.2.27\n"
+"X-Domain: sb-elementor-contact-form-db"
+
+#: admin/feedback/cpfm-common-notice.php:216
+msgid " More info"
+msgstr ""
+
+#. %1$d - trashed forms count.
+#: admin/entries/fdbgp-post-bulk-actions.php:498
+#, php-format
+msgid "%1$d form has been moved to Trash."
+msgid_plural "%1$d forms have been moved to Trash."
+msgstr[0] ""
+msgstr[1] ""
+
+#. %1$d - deleted forms count.
+#: admin/entries/fdbgp-post-bulk-actions.php:493
+#, php-format
+msgid "%1$d form has been permanently deleted."
+msgid_plural "%1$d forms have been permanently deleted."
+msgstr[0] ""
+msgstr[1] ""
+
+#. %1$d - restored forms count.
+#: admin/entries/fdbgp-post-bulk-actions.php:488
+#, php-format
+msgid "%1$d form has been restored successfully."
+msgid_plural "%1$d forms have been restored successfully."
+msgstr[0] ""
+msgstr[1] ""
+
+#: admin/entries/fdbgp-list-table.php:384
+msgid "0 items"
+msgstr ""
+
+#: admin/views/old-submission.php:180
+msgid "About Old Submissions"
+msgstr ""
+
+#: admin/views/form-to-posttype.php:156 admin/views/form-to-sheet.php:179
+msgid "Action"
+msgstr ""
+
+#: includes/widgets/helloplus-widget-loader.php:99
+msgid "Actions After Submit"
+msgstr ""
+
+#: admin/entries/fdbgp-entries-posts.php:85
+msgid "Add New"
+msgstr ""
+
+#: admin/entries/fdbgp-entries-posts.php:84
+msgid "Add New Item"
+msgstr ""
+
+#: admin/class-fdbgp-admin.php:193 admin/views/advanced-fields.php:272
+#: admin/views/advanced-fields.php:299
+msgid "Advanced Fields"
+msgstr ""
+
+#: admin/class-fdbgp-admin.php:174
+#: admin/register-menu-dashboard/fdbgp-dashboard.php:213
+msgid "Advanced Form Builder For Elementor"
+msgstr ""
+
+#: includes/widgets/helloplus-modules/action/collect-entries.php:48
+#: includes/widgets/helloplus-modules/action/save-form-data.php:48
+msgid "All"
+msgstr ""
+
+#: admin/entries/fdbgp-entries-posts.php:216
+msgid "All submissions will appear in this list."
+msgstr ""
+
+#: admin/views/settings.php:380
+msgid "Are you sure you want to reset all Google API settings?"
+msgstr ""
+
+#: admin/views/settings.php:329
+msgid "Are you sure you want to revoke the token?"
+msgstr ""
+
+#: includes/widgets/helloplus-modules/helloplus-fdbgp-form-sheets-action.php:485
+#: includes/widgets/modules/class-fdbgp-form-sheets-action.php:466
+msgid "Authentication required. Connect your Google account to use Sheets."
+msgstr ""
+
+#: admin/views/settings.php:296
+msgid "Authentication Token"
+msgstr ""
+
+#: admin/views/advanced-fields.php:244
+msgid "Auto Detect Country"
+msgstr ""
+
+#: admin/views/advanced-fields.php:44
+msgid "Calculator Field"
+msgstr ""
+
+#: includes/widgets/helloplus-modules/action/save-form-data.php:24
+msgid "Choose whether to save the form data or not"
+msgstr ""
+
+#: includes/widgets/helloplus-modules/helloplus-fdbgp-form-sheets-action.php:486
+#: includes/widgets/helloplus-modules/helloplus-fdbgp-form-sheets-action.php:514
+#: includes/widgets/modules/class-fdbgp-form-sheets-action.php:467
+#: includes/widgets/modules/class-fdbgp-form-sheets-action.php:495
+msgid "Click Here"
+msgstr ""
+
+#: admin/views/settings.php:257
+msgid "Client ID"
+msgstr ""
+
+#: admin/views/settings.php:276
+msgid "Client Secret Key"
+msgstr ""
+
+#: admin/views/advanced-fields.php:128
+msgid "Cloudflare Turnstile"
+msgstr ""
+
+#: includes/widgets/helloplus-modules/action/collect-entries.php:15
+msgid "Collect Entries"
+msgstr ""
+
+#: includes/widgets/helloplus-modules/action/collect-entries.php:45
+#: includes/widgets/helloplus-modules/action/save-form-data.php:45
+msgid "Collect Entries Field"
+msgstr ""
+
+#: includes/widgets/helloplus-modules/action/collect-entries.php:57
+#: includes/widgets/helloplus-modules/action/save-form-data.php:60
+msgid "Collect Entries Meta Data"
+msgstr ""
+
+#: admin/views/advanced-fields.php:165
+msgid "Conditional Logic"
+msgstr ""
+
+#: admin/views/advanced-fields.php:153
+msgid "Conditional MailChimp"
+msgstr ""
+
+#: admin/views/advanced-fields.php:100
+msgid "Confirm Dialog Box"
+msgstr ""
+
+#. Description of the plugin
+msgid ""
+"Connect Elementor forms with Google Sheets to sync form entries, or save "
+"frontend form submissions in any WordPress post type using Elementor Pro or "
+"Hello Plus forms."
+msgstr ""
+
+#: admin/views/form-to-posttype.php:162
+msgid "Connect Post Type"
+msgstr ""
+
+#: admin/views/form-to-sheet.php:185
+msgid "Connect Sheet"
+msgstr ""
+
+#: admin/views/settings.php:250
+msgid "Connect your Google account to sync form data with Google Sheets."
+msgstr ""
+
+#: includes/widgets/helloplus-widget-loader.php:94
+msgid "Cool Actions After Submit"
+msgstr ""
+
+#. Author of the plugin
+msgid "Cool Plugins"
+msgstr ""
+
+#: admin/entries/fdbgp-entries-posts.php:107
+msgid "cool-formkit-entry"
+msgstr ""
+
+#: admin/views/settings.php:428 admin/views/settings.php:439
+msgid "Copy"
+msgstr ""
+
+#: admin/views/advanced-fields.php:228
+msgid "Country code"
+msgstr ""
+
+#: admin/views/form-to-sheet.php:241
+msgid ""
+"Create a new Elementor Form and enable the \"Save Submissions in Google "
+"Sheet\" action under Actions After Submit."
+msgstr ""
+
+#: admin/views/form-to-posttype.php:216
+msgid ""
+"Create a new Elementor Form and enable the \"Save Submissions In Post Type\" "
+"action under Actions After Submit."
+msgstr ""
+
+#: admin/entries/fdbgp-entries-posts.php:192
+msgid "Create a page with Hello+ Form widget"
+msgstr ""
+
+#: admin/entries/fdbgp-entries-posts.php:191
+msgid "Create Form"
+msgstr ""
+
+#: admin/views/form-to-posttype.php:211 admin/views/form-to-sheet.php:236
+msgid "Create New Form"
+msgstr ""
+
+#: includes/lib-helpers/class-fdbgp-google-api-functions.php:268
+msgid "Create New Spreadsheet"
+msgstr ""
+
+#: includes/lib-helpers/trait-fdbgp-ajax-handlers.php:123
+#: includes/widgets/helloplus-modules/helloplus-fdbgp-form-sheets-action.php:601
+#: includes/widgets/modules/class-fdbgp-form-sheets-action.php:583
+msgid "Create New Tab"
+msgstr ""
+
+#: admin/views/old-submission.php:145
+msgid "CSV Content (by Form ID)"
+msgstr ""
+
+#: admin/views/old-submission.php:141
+msgid "CSV Content (by Submitted Page)"
+msgstr ""
+
+#: admin/views/advanced-fields.php:114
+msgid "Currency Field"
+msgstr ""
+
+#: admin/entries/fdbgp-post-bulk-actions.php:355
+msgid "Delete Permanently"
+msgstr ""
+
+#: sb_elementor_contact_form_db.php:78
+msgid "Docs"
+msgstr ""
+
+#: admin/views/old-submission.php:168
+msgid "Download CSV File"
+msgstr ""
+
+#: admin/views/form-to-posttype.php:178 admin/views/form-to-sheet.php:201
+msgid "Edit Form"
+msgstr ""
+
+#: admin/class-fdbgp-admin.php:51
+msgid "Elementor Form Addons by Cool Plugins"
+msgstr ""
+
+#: admin/views/old-submission.php:217
+msgid "Elementor Submissions tab"
+msgstr ""
+
+#: admin/views/advanced-fields.php:190
+msgid "Email Conditionaly"
+msgstr ""
+
+#: admin/entries/fdbgp-entries-posts.php:200
+msgid "Enable \"Collect Submissions\" action in form settings."
+msgstr ""
+
+#: admin/entries/fdbgp-entries-posts.php:199
+msgid "Enable Action"
+msgstr ""
+
+#: admin/views/settings.php:268
+msgid "Enter your Google API Client ID"
+msgstr ""
+
+#: admin/views/settings.php:287
+msgid "Enter your Google API Client Secret key"
+msgstr ""
+
+#: admin/entries/fdbgp-entries-posts.php:78
+#: admin/entries/fdbgp-entries-posts.php:79
+msgid "Entrie"
+msgstr ""
+
+#: admin/entries/fdbgp-entries-posts.php:80
+msgid "Entrie Archives"
+msgstr ""
+
+#: admin/entries/fdbgp-entries-posts.php:81
+msgid "Entrie Attributes"
+msgstr ""
+
+#: admin/entries/fdbgp-entries-posts.php:83
+msgid "Entries"
+msgstr ""
+
+#: includes/widgets/helloplus-modules/helloplus-fdbgp-form-sheets-action.php:513
+#: includes/widgets/modules/class-fdbgp-form-sheets-action.php:494
+msgid ""
+"Error: Invalid Token - Revoke Token with Google Sheet Setting and try again."
+msgstr ""
+
+#: admin/views/old-submission.php:101
+msgid "Export by Form ID"
+msgstr ""
+
+#: admin/views/old-submission.php:77
+msgid "Export by Page Submitted"
+msgstr ""
+
+#: admin/views/old-submission.php:195
+msgid "Export Options"
+msgstr ""
+
+#: admin/views/old-submission.php:196
+msgid ""
+"Export your old data to CSV format for backup or migration to a new system."
+msgstr ""
+
+#: admin/entries/fdbgp-entries-posts.php:94
+msgid "Featured Image"
+msgstr ""
+
+#: admin/views/advanced-fields.php:258
+msgid "Field Masking"
+msgstr ""
+
+#: admin/entries/fdbgp-entries-posts.php:102
+msgid "Filter from entry list"
+msgstr ""
+
+#: admin/entries/fdbgp-entries-posts.php:106
+msgid "Form Entries"
+msgstr ""
+
+#: admin/entries/fdbgp-entries-posts.php:100
+msgid "Form entries list"
+msgstr ""
+
+#: admin/entries/fdbgp-entries-posts.php:101
+msgid "Form entries list navigation"
+msgstr ""
+
+#: admin/views/form-to-posttype.php:152 admin/views/form-to-sheet.php:175
+msgid "Form Name"
+msgstr ""
+
+#: admin/class-fdbgp-admin.php:179
+msgid "Forms To Post Type"
+msgstr ""
+
+#: admin/class-fdbgp-admin.php:178
+msgid "Forms To Sheet"
+msgstr ""
+
+#: admin/class-fdbgp-admin.php:131 admin/class-fdbgp-admin.php:142
+#: admin/class-fdbgp-admin.php:143
+msgid "FormsDB"
+msgstr ""
+
+#. Name of the plugin
+msgid "FormsDB for Elementor Forms"
+msgstr ""
+
+#: admin/views/settings.php:304
+msgid "Generate Authentication Token"
+msgstr ""
+
+#: admin/views/settings.php:249
+msgid "Google API Settings"
+msgstr ""
+
+#: admin/views/form-to-sheet.php:178
+msgid "Google Sheet"
+msgstr ""
+
+#: admin/views/advanced-fields.php:136
+msgid "hCAPTCHA"
+msgstr ""
+
+#: admin/views/advanced-fields.php:264 admin/views/advanced-fields.php:291
+msgid "Hello Plus Support"
+msgstr ""
+
+#: admin/class-fdbgp-admin.php:187 admin/entries/fdbgp-entries-posts.php:145
+msgid "Hello+ Form Entries"
+msgstr ""
+
+#: admin/views/settings.php:347
+msgid "Help Improve Plugin"
+msgstr ""
+
+#: admin/feedback/cpfm-common-notice.php:190
+msgid "Help Improve Plugins"
+msgstr ""
+
+#: admin/class-fdbgp-admin.php:52 admin/views/settings.php:352
+msgid ""
+"Help us make this plugin more compatible with your site by sharing non-"
+"sensitive site data."
+msgstr ""
+
+#: admin/entries/fdbgp-entries-posts.php:184
+msgid "How to use"
+msgstr ""
+
+#. Author URI of the plugin
+msgid ""
+"https://coolplugins.net/?"
+"utm_source=formsdb&utm_medium=inside&utm_campaign=author_page&utm_content=plugins_list"
+msgstr ""
+
+#. URI of the plugin
+msgid ""
+"https://coolplugins.net/product/formsdb-connect-elementor-forms-google-"
+"sheets/?"
+"utm_source=formsdb&utm_medium=inside&utm_campaign=plugin_page&utm_content=plugins_list"
+msgstr ""
+
+#: admin/feedback/admin-feedback-form.php:156
+msgid ""
+"I agree to share anonymous usage data and basic site details (such as server,"
+" PHP, and WordPress versions) to support FormsDB For Elementor Forms "
+"improvement efforts. Additionally, I allow Cool Plugins to store all "
+"information provided through this form and to respond to my inquiry"
+msgstr ""
+
+#: admin/feedback/admin-feedback-form.php:184
+msgid "I found a better plugin"
+msgstr ""
+
+#: admin/feedback/admin-feedback-form.php:103
+msgid "I found a better plugin."
+msgstr ""
+
+#: admin/feedback/admin-feedback-form.php:135
+msgid ""
+"If you have a moment, please share the reason for deactivating this plugin."
+msgstr ""
+
+#: admin/views/advanced-fields.php:65
+msgid "Image Radio"
+msgstr ""
+
+#: admin/views/advanced-fields.php:285
+msgid "Input Mask"
+msgstr ""
+
+#: admin/entries/fdbgp-entries-posts.php:98
+msgid "Insert into item"
+msgstr ""
+
+#: admin/feedback/admin-feedback-form.php:111
+#: admin/feedback/admin-feedback-form.php:192
+msgid "It's a temporary deactivation."
+msgstr ""
+
+#: admin/views/advanced-fields.php:79
+msgid "Label Styler"
+msgstr ""
+
+#: includes/widgets/helloplus-modules/action/collect-entries.php:37
+#: includes/widgets/helloplus-modules/action/save-form-data.php:34
+msgid "Learn More"
+msgstr ""
+
+#: admin/views/old-submission.php:187
+msgid "Legacy Data"
+msgstr ""
+
+#: admin/views/old-submission.php:56
+msgid "Legacy Data Notice:"
+msgstr ""
+
+#: admin/views/advanced-fields.php:121
+msgid "Month/Week Field"
+msgstr ""
+
+#: admin/views/advanced-fields.php:210
+msgid "More Operators"
+msgstr ""
+
+#: admin/entries/fdbgp-post-bulk-actions.php:359
+msgid "Move to Trash"
+msgstr ""
+
+#: admin/views/advanced-fields.php:200
+msgid "Multiple OR Conditions"
+msgstr ""
+
+#: admin/entries/fdbgp-entries-posts.php:222 admin/views/old-submission.php:226
+msgid "NEED HELP?"
+msgstr ""
+
+#: admin/entries/fdbgp-entries-posts.php:86
+msgid "New Item"
+msgstr ""
+
+#: includes/widgets/helloplus-modules/helloplus-fdbgp-form-sheets-action.php:636
+#: includes/widgets/modules/class-fdbgp-form-sheets-action.php:619
+msgid "New Sheet Tab Name"
+msgstr ""
+
+#: admin/views/old-submission.php:211
+msgid "New Submissions"
+msgstr ""
+
+#: admin/views/old-submission.php:204
+msgid ""
+"New submissions are no longer saved in this format. Use Google Sheets or "
+"Post Type integration for new forms."
+msgstr ""
+
+#: includes/widgets/helloplus-modules/action/save-form-data.php:22
+msgid "No"
+msgstr ""
+
+#: admin/views/form-to-sheet.php:228
+msgid ""
+"No Elementor form is using the \"Save Submissions in Google Sheet\" action."
+msgstr ""
+
+#: admin/views/form-to-posttype.php:204
+msgid ""
+"No Elementor form is using the \"Save Submissions In Post Type\" action."
+msgstr ""
+
+#: admin/views/old-submission.php:126
+msgid "No old submissions found."
+msgstr ""
+
+#: admin/feedback/cpfm-common-notice.php:230
+msgid "No, Thanks"
+msgstr ""
+
+#: admin/entries/fdbgp-entries-posts.php:92
+msgid "Not found"
+msgstr ""
+
+#: admin/entries/fdbgp-entries-posts.php:93
+msgid "Not found in Trash"
+msgstr ""
+
+#: admin/views/old-submission.php:37
+msgid "Old Form Submissions"
+msgstr ""
+
+#: admin/class-fdbgp-admin.php:196
+msgid "Old Submissions"
+msgstr ""
+
+#: admin/feedback/cron/fdbgp-class-cron.php:31
+msgid "Once every 30 days"
+msgstr ""
+
+#: admin/feedback/cpfm-common-notice.php:220 admin/views/settings.php:357
+msgid ""
+"Opt in to receive email updates about security improvements, new features, "
+"helpful tutorials, and occasional special offers. We'll collect:"
+msgstr ""
+
+#: admin/feedback/admin-feedback-form.php:196
+msgid "Other"
+msgstr ""
+
+#: admin/feedback/admin-feedback-form.php:115
+msgid "Other reason."
+msgstr ""
+
+#: admin/views/form-to-posttype.php:153 admin/views/form-to-sheet.php:176
+msgid "Page Title"
+msgstr ""
+
+#: includes/widgets/helloplus-modules/helloplus-fdbgp-form-sheets-action.php:658
+#: includes/widgets/modules/class-fdbgp-form-sheets-action.php:641
+msgid "Page URL"
+msgstr ""
+
+#: admin/entries/fdbgp-entries-posts.php:82
+msgid "Parent Item:"
+msgstr ""
+
+#: includes/widgets/helloplus-modules/helloplus-fdbgp-form-sheets-action.php:600
+#: includes/widgets/modules/class-fdbgp-form-sheets-action.php:582
+msgid "Please Enter Sheet Tab Name"
+msgstr ""
+
+#: admin/views/old-submission.php:156
+msgid ""
+"Please review the data below and press \"Download CSV File\" to start the "
+"download. This preview shows up to 50 submissions. The export will include "
+"all submissions."
+msgstr ""
+
+#: includes/widgets/helloplus-modules/helloplus-fdbgp-form-sheets-action.php:559
+#: includes/widgets/modules/class-fdbgp-form-sheets-action.php:541
+msgid "Please Select a Spreadsheet"
+msgstr ""
+
+#: admin/feedback/admin-feedback-form.php:116
+#: admin/feedback/admin-feedback-form.php:197
+msgid "Please share the reason."
+msgstr ""
+
+#: admin/feedback/admin-feedback-form.php:104
+#: admin/feedback/admin-feedback-form.php:185
+msgid "Please share which plugin."
+msgstr ""
+
+#. %s: link to Elementor Submissions tab
+#: admin/views/old-submission.php:216
+#, php-format
+msgid "Please visit the %s for your new form entries."
+msgstr ""
+
+#: admin/views/form-to-posttype.php:155
+msgid "Post Type"
+msgstr ""
+
+#: admin/entries/fdbgp-entries-posts.php:76
+msgctxt "Post Type General Name"
+msgid "Form Entries"
+msgstr ""
+
+#: admin/entries/fdbgp-entries-posts.php:77
+msgctxt "Post Type Singular Name"
+msgid "Entrie"
+msgstr ""
+
+#: admin/views/old-submission.php:91 admin/views/old-submission.php:115
+msgid "Preview"
+msgstr ""
+
+#: admin/views/advanced-fields.php:360
+msgid "Pro"
+msgstr ""
+
+#: admin/feedback/admin-feedback-form.php:126
+msgid "Quick Feedback"
+msgstr ""
+
+#: admin/views/advanced-fields.php:72
+msgid "Radio & Checkbox Styler"
+msgstr ""
+
+#: admin/views/advanced-fields.php:37
+msgid "Range Slider"
+msgstr ""
+
+#: admin/views/advanced-fields.php:51
+msgid "Rating Field"
+msgstr ""
+
+#: admin/views/old-submission.php:203
+msgid "Read Only"
+msgstr ""
+
+#: admin/views/advanced-fields.php:181
+msgid "Redirect Conditionaly"
+msgstr ""
+
+#: admin/entries/fdbgp-entries-posts.php:96
+msgid "Remove featured image"
+msgstr ""
+
+#: admin/views/settings.php:381
+msgid "Reset Google Settings"
+msgstr ""
+
+#: admin/entries/fdbgp-post-bulk-actions.php:354
+msgid "Restore"
+msgstr ""
+
+#: admin/views/advanced-fields.php:107
+msgid "Restrict Date"
+msgstr ""
+
+#: admin/views/settings.php:328
+msgid "Revoke Token"
+msgstr ""
+
+#: admin/views/settings.php:228
+msgid "Save Changes"
+msgstr ""
+
+#: includes/widgets/helloplus-modules/action/save-form-data.php:19
+msgid "Save Form Data"
+msgstr ""
+
+#: admin/class-fdbgp-admin.php:248
+msgid "Save Form Submissions To Google Sheet"
+msgstr ""
+
+#: admin/views/form-to-sheet.php:84
+msgid "Save Form Submissions to Google Sheets"
+msgstr ""
+
+#: admin/views/settings.php:376
+msgid "Save Settings"
+msgstr ""
+
+#: includes/widgets/helloplus-modules/helloplus-fdbgp-form-sheets-action.php:92
+#: includes/widgets/helloplus-modules/helloplus-fdbgp-form-sheets-action.php:491
+#: includes/widgets/helloplus-modules/helloplus-fdbgp-form-sheets-action.php:525
+#: includes/widgets/helloplus-modules/helloplus-fdbgp-form-sheets-action.php:544
+#: includes/widgets/modules/class-fdbgp-form-sheets-action.php:86
+#: includes/widgets/modules/class-fdbgp-form-sheets-action.php:472
+#: includes/widgets/modules/class-fdbgp-form-sheets-action.php:506
+#: includes/widgets/modules/class-fdbgp-form-sheets-action.php:525
+msgid "Save Submissions in Google Sheet"
+msgstr ""
+
+#: admin/entries/fdbgp-entries-posts.php:162
+msgid "Search Forms"
+msgstr ""
+
+#: admin/entries/fdbgp-entries-posts.php:91
+msgid "Search Item"
+msgstr ""
+
+#: admin/entries/fdbgp-post-bulk-actions.php:407 admin/views/settings.php:165
+msgid "Security check failed. Please try again."
+msgstr ""
+
+#: admin/views/settings.php:353
+msgid "See terms"
+msgstr ""
+
+#: includes/widgets/helloplus-modules/helloplus-fdbgp-form-sheets-action.php:650
+#: includes/widgets/modules/class-fdbgp-form-sheets-action.php:633
+msgid "Select a data to save in sheet"
+msgstr ""
+
+#: includes/widgets/helloplus-modules/helloplus-fdbgp-form-sheets-action.php:621
+#: includes/widgets/modules/class-fdbgp-form-sheets-action.php:604
+msgid "Select Sheet Tab Name"
+msgstr ""
+
+#: includes/widgets/helloplus-modules/helloplus-fdbgp-form-sheets-action.php:564
+#: includes/widgets/modules/class-fdbgp-form-sheets-action.php:546
+msgid "Select Spreadsheet"
+msgstr ""
+
+#: admin/views/advanced-fields.php:86
+msgid "Select2"
+msgstr ""
+
+#: includes/widgets/helloplus-modules/action/collect-entries.php:49
+#: includes/widgets/helloplus-modules/action/save-form-data.php:49
+msgid "Selected"
+msgstr ""
+
+#: admin/views/form-to-posttype.php:49
+msgid "Send Form Submissions to Post Types"
+msgstr ""
+
+#: admin/entries/fdbgp-entries-posts.php:95
+msgid "Set featured image"
+msgstr ""
+
+#: admin/class-fdbgp-admin.php:189 admin/views/settings.php:224
+msgid "Settings"
+msgstr ""
+
+#: admin/views/settings.php:200
+msgid "Settings reset successfully!"
+msgstr ""
+
+#: admin/views/settings.php:184
+msgid "Settings saved successfully!"
+msgstr ""
+
+#: includes/widgets/helloplus-modules/helloplus-fdbgp-form-sheets-action.php:589
+#: includes/widgets/modules/class-fdbgp-form-sheets-action.php:571
+msgid "Sheet Tab Name"
+msgstr ""
+
+#. Hidden accessibility text.
+#: admin/entries/fdbgp-list-table.php:214
+msgid "Show more details"
+msgstr ""
+
+#: admin/views/advanced-fields.php:58
+msgid "Signature Field"
+msgstr ""
+
+#: includes/widgets/helloplus-modules/helloplus-fdbgp-form-sheets-action.php:576
+#: includes/widgets/modules/class-fdbgp-form-sheets-action.php:558
+msgid "Spreadsheet Name"
+msgstr ""
+
+#: admin/views/advanced-fields.php:236
+msgid "State Field"
+msgstr ""
+
+#: admin/views/form-to-posttype.php:154 admin/views/form-to-sheet.php:177
+msgid "Status"
+msgstr ""
+
+#: includes/widgets/helloplus-modules/helloplus-fdbgp-form-sheets-action.php:659
+#: includes/widgets/modules/class-fdbgp-form-sheets-action.php:642
+msgid "Submission DateTime"
+msgstr ""
+
+#: admin/views/advanced-fields.php:172
+msgid "Submit Conditions"
+msgstr ""
+
+#: admin/entries/fdbgp-entries-posts.php:207
+msgid "Submit Form"
+msgstr ""
+
+#: admin/entries/fdbgp-entries-posts.php:208
+msgid "Submit your form from the frontend to save entries."
+msgstr ""
+
+#: admin/feedback/admin-feedback-form.php:180
+msgid "The plugin didn't work as expected"
+msgstr ""
+
+#: admin/feedback/admin-feedback-form.php:99
+msgid "The plugin didn't work as expected."
+msgstr ""
+
+#: admin/feedback/admin-feedback-form.php:188
+msgid "The plugin is not working"
+msgstr ""
+
+#: admin/feedback/admin-feedback-form.php:107
+msgid "The plugin is not working."
+msgstr ""
+
+#: admin/views/old-submission.php:188
+msgid "These are form submissions from a previous version of the plugin."
+msgstr ""
+
+#: includes/widgets/helloplus-modules/action/collect-entries.php:36
+#: includes/widgets/helloplus-modules/action/save-form-data.php:33
+msgid ""
+"This action will collect the entries and store it in a variable. You can use "
+"this variable in the next action or in the same form."
+msgstr ""
+
+#: admin/views/old-submission.php:57
+msgid ""
+"This tab displays old form submissions from a previous plugin version. These "
+"submissions are read-only and cannot be modified. You can export this data "
+"to CSV format."
+msgstr ""
+
+#: admin/feedback/cpfm-common-notice.php:223 admin/views/settings.php:363
+msgid ""
+"To check plugin compatibility, we will collect the following: list of active "
+"plugins and themes, server type, MySQL version, WordPress version, memory "
+"limit, site language and database prefix."
+msgstr ""
+
+#: admin/views/advanced-fields.php:144
+msgid "Toggle Field"
+msgstr ""
+
+#: admin/views/settings.php:322
+msgid "Token is configured"
+msgstr ""
+
+#: admin/views/settings.php:192
+msgid "Token revoked successfully!"
+msgstr ""
+
+#: admin/views/form-to-posttype.php:321 admin/views/form-to-sheet.php:357
+msgid "Unnamed Form"
+msgstr ""
+
+#: admin/entries/fdbgp-entries-posts.php:88
+msgid "Update Item"
+msgstr ""
+
+#: admin/entries/fdbgp-entries-posts.php:99
+msgid "Uploaded to this item"
+msgstr ""
+
+#: admin/entries/fdbgp-entries-posts.php:97
+msgid "Use as featured image"
+msgstr ""
+
+#: includes/widgets/helloplus-modules/helloplus-fdbgp-form-sheets-action.php:657
+#: includes/widgets/modules/class-fdbgp-form-sheets-action.php:640
+#: includes/widgets/helloplus-modules/action/collect-entries.php:61
+#: includes/widgets/helloplus-modules/action/save-form-data.php:64
+msgid "User Agent"
+msgstr ""
+
+#: includes/widgets/helloplus-modules/helloplus-fdbgp-form-sheets-action.php:656
+#: includes/widgets/modules/class-fdbgp-form-sheets-action.php:639
+#: includes/widgets/helloplus-modules/action/collect-entries.php:60
+#: includes/widgets/helloplus-modules/action/save-form-data.php:63
+msgid "User IP"
+msgstr ""
+
+#: admin/views/form-to-posttype.php:145
+msgid ""
+"View all your Elementor forms here and connect them to WordPress posts, "
+"pages, or custom post types. Use form submissions to create content directly "
+"from the frontend."
+msgstr ""
+
+#: admin/views/form-to-sheet.php:168
+msgid ""
+"View all your Elementor forms here and manage their connection with Google "
+"Sheets. Automatically send new form submissions to your selected Google "
+"Sheet."
+msgstr ""
+
+#: admin/entries/fdbgp-entries-posts.php:215
+msgid "View Entries"
+msgstr ""
+
+#: admin/entries/fdbgp-entries-posts.php:87
+msgid "View Entry"
+msgstr ""
+
+#: sb_elementor_contact_form_db.php:78
+msgid "View FormsDB Documentation"
+msgstr ""
+
+#: admin/entries/fdbgp-entries-posts.php:89
+msgid "View Item"
+msgstr ""
+
+#: admin/entries/fdbgp-entries-posts.php:90
+msgid "View Items"
+msgstr ""
+
+#: admin/views/form-to-sheet.php:190
+msgid "View Sheet"
+msgstr ""
+
+#: admin/views/advanced-fields.php:334
+msgid "What is Cool FormKit?"
+msgstr ""
+
+#: admin/views/advanced-fields.php:29
+msgid "Whatsapp Redirect"
+msgstr ""
+
+#: admin/views/advanced-fields.php:93
+msgid "WYSIWYG"
+msgstr ""
+
+#: includes/widgets/helloplus-modules/action/save-form-data.php:21
+msgid "Yes"
+msgstr ""
+
+#: admin/feedback/cpfm-common-notice.php:229
+msgid "Yes, I Agree"
+msgstr ""
+
+#. %d: number of old form submissions
+#: admin/views/old-submission.php:65
+msgid "You have %d old form submission(s) stored in the database."
+msgstr ""
+
+#: admin/feedback/cpfm-common-notice.php:222 admin/views/settings.php:362
+msgid "Your website home URL and WordPress admin email."
+msgstr ""
+
+#: admin/class-fdbgp-admin.php:132
+msgid "↳ FormsDB"
+msgstr ""

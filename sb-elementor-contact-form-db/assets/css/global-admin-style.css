@@ -1,0 +1,6 @@
+a[href="admin.php?page=elementor-forms-addons"] {
+    display: none !important;
+}
+li a[href="admin.php?page=cfkef-entries"]{
+    display: none !important;
+}
