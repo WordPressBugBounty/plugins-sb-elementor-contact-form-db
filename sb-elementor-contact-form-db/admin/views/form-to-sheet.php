@@ -24,6 +24,47 @@ class FDBGP_Form_To_Sheet_Settings {
         $this->render_page( $forms_to_show, $total_items, $current_page );
     }
 
+    private function get_first_plugin_source(): string {
+        $form_mask_installed_date              = get_option( 'fme-installDate' );
+        $conditional_fields_installed_date     = get_option( 'cfef-installDate' );
+        $conditional_fields_pro_installed_date = get_option( 'cfefp-installDate' );
+        $country_code_installed_date           = get_option( 'ccfef-installDate' );
+        $formsdb_installed_date                = get_option( 'formsdb-installDate' );
+
+        // New: read stored oldest plugin (set once)
+        $stored_oldest_plugin = get_option( 'oldest_plugin' );
+
+        $plugins_dates = [
+            'fim_plugin'   => $form_mask_installed_date,
+            'cfef_plugin'  => $conditional_fields_installed_date,
+            'cfefp_plugin' => $conditional_fields_pro_installed_date,
+            'ccfef_plugin' => $country_code_installed_date,
+            'formsdb'      => $formsdb_installed_date,
+        ];
+
+        $plugins_dates = array_filter( $plugins_dates );
+
+        $install_by_plugin = get_option( 'sb-elementor-install-by' );
+
+        if ( ! empty( $install_by_plugin ) ) {
+            $first_plugin = $install_by_plugin;
+        } elseif ( ! empty( $stored_oldest_plugin ) ) {
+            $first_plugin = $stored_oldest_plugin;
+        } else {
+            if ( ! empty( $plugins_dates ) ) {
+                asort( $plugins_dates );
+                $first_plugin = key( $plugins_dates );
+            } else {
+                $first_plugin = 'formsdb';
+            }
+
+            // Store it so it never changes on re-install
+            update_option( 'oldest_plugin', $first_plugin );
+        }
+
+        return $first_plugin;
+    }
+
     private function get_current_page() {
         // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- get the current page, no data modification.
         $paged = isset( $_GET['paged'] ) ? absint( $_GET['paged'] ) : 1;
@@ -167,8 +208,8 @@ class FDBGP_Form_To_Sheet_Settings {
                     <div class="fdbgp-help-box">
                         <h4>NEED HELP & SETUP GUIDANCE?</h4>
                         <div class="button-groups">
-                            <a href="https://docs.coolplugins.net/doc/formsdb-video-tutorials/?utm_source=formsdb&utm_medium=inside&utm_campaign=docs&utm_content=setting_page_sidebar" target="_blank" rel="noopener noreferrer" class="button button-primary" style="width: 49%;"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="#f9f9f9ff" style="vertical-align: middle; margin-right: 4px;"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg> Video Tutorial</a>
-                            <a href="https://docs.coolplugins.net/doc/sync-form-submissions-google-sheets/?utm_source=formsdb&utm_medium=inside&utm_campaign=docs&utm_content=setting_page_sidebar" target="_blank" rel="noopener noreferrer" class="button button-secondary" style="width: 49%;"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="#000" style="vertical-align: middle; margin-right: 4px;"><path d="M21 4H3a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zM3 6h8v12H3V6zm10 12V6h8v12h-8z"/><path d="M14 8h6v2h-6zM14 11h6v2h-6zM14 14h4v2h-4z"/></svg> Read Docs</a>
+                            <a href="https://docs.coolplugins.net/doc/formsdb-video-tutorials/?utm_source=<?php echo esc_attr($this->get_first_plugin_source()); ?>&utm_medium=inside&utm_campaign=docs&utm_content=setting_page_sidebar" target="_blank" rel="noopener noreferrer" class="button button-primary" style="width: 49%;"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="#f9f9f9ff" style="vertical-align: middle; margin-right: 4px;"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg> Video Tutorial</a>
+                            <a href="https://docs.coolplugins.net/doc/sync-form-submissions-google-sheets/?utm_source=<?php echo esc_attr($this->get_first_plugin_source()); ?>&utm_medium=inside&utm_campaign=docs&utm_content=setting_page_sidebar" target="_blank" rel="noopener noreferrer" class="button button-secondary" style="width: 49%;"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="#000" style="vertical-align: middle; margin-right: 4px;"><path d="M21 4H3a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zM3 6h8v12H3V6zm10 12V6h8v12h-8z"/><path d="M14 8h6v2h-6zM14 11h6v2h-6zM14 14h4v2h-4z"/></svg> Read Docs</a>
                         </div>
                     </div>
                 </div>
@@ -193,7 +234,7 @@ class FDBGP_Form_To_Sheet_Settings {
                         <li><span class="fdbgp-icon">✔️</span><?php esc_html_e('Advanced Form Builder for Elementor.', 'sb-elementor-contact-form-db'); ?></li>
                         <li><span class="fdbgp-icon">✔️</span><?php esc_html_e('Spam Blocker & Advanced Actions After Submit.', 'sb-elementor-contact-form-db'); ?></li>
                     </ul>
-                    <a href="https://coolformkit.com/?utm_source=formsdb&utm_medium=inside&utm_campaign=upgrade&utm_content=setting_page_sidebar" class="button button-primary" target="_blank" style="width: 100%;text-align: center;padding:10px;"><?php esc_html_e('Get Cool Formkit', 'sb-elementor-contact-form-db'); ?></a>
+                    <a href="https://coolformkit.com/?utm_source=<?php echo esc_attr($this->get_first_plugin_source()); ?>&utm_medium=inside&utm_campaign=upgrade&utm_content=setting_page_sidebar" class="button button-primary" target="_blank" style="width: 100%;text-align: center;padding:10px;"><?php esc_html_e('Get Cool Formkit', 'sb-elementor-contact-form-db'); ?></a>
                 </div>
                 <?php endif; ?>
 
@@ -242,7 +283,7 @@ class FDBGP_Form_To_Sheet_Settings {
                             data-init="<?php echo esc_attr($plugin_file); ?>">
                             <?php echo esc_html($button_text); ?>
                         </button>
-                        <a href="https://docs.coolplugins.net/plugin/conditional-fields-for-elementor-form/?utm_source=formsdb&utm_medium=inside&utm_campaign=upgrade&utm_content=setting_page_sidebar" class="button button-secondary" target="_blank" style="width: 49%;text-align: center;"><?php esc_html_e('Read Docs', 'sb-elementor-contact-form-db'); ?></a>
+                        <a href="https://docs.coolplugins.net/plugin/conditional-fields-for-elementor-form/?utm_source=<?php echo esc_attr($this->get_first_plugin_source()); ?>&utm_medium=inside&utm_campaign=upgrade&utm_content=setting_page_sidebar" class="button button-secondary" target="_blank" style="width: 49%;text-align: center;"><?php esc_html_e('Read Docs', 'sb-elementor-contact-form-db'); ?></a>
                     </div>
                 </div>
                 <?php endif; ?>

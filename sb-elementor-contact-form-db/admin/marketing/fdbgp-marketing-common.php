@@ -370,6 +370,17 @@ if (! class_exists('FDBGP_Marketing_Controllers')) {
 		}
 
 		/**
+		 * Set "install by" option for known plugins (so it persists even if activation redirects).
+		 *
+		 * @param string $plugin_slug Plugin slug.
+		 */
+		private function fdbgp_set_install_by_option( $plugin_slug ) {
+			$parts = explode('-', $plugin_slug);
+			$two_parts_plugin_slug = implode('-', array_slice($parts, 0, 2));
+			update_option( $two_parts_plugin_slug . '-install-by', 'formsdb' );
+		}
+
+		/**
 		 * ✅ AJAX: Install plugin
 		 * 
 		 * Handles the installation of a specified plugin via AJAX.
@@ -402,14 +413,14 @@ if (! class_exists('FDBGP_Marketing_Controllers')) {
 				'loop-grid-extender-for-elementor-pro',
 				'events-widgets-for-elementor-and-the-events-calendar',
 				'conditional-fields-for-elementor-form-pro',
-				'sb-elementor-contact-form-db',
+				'sb-elementor-contact-form-db'
 			);
 			if ( ! in_array( $plugin_slug, $allowed_slugs, true ) ) {
 				wp_send_json_error( array(
 					'slug' => $plugin_slug,
 					'errorCode'=> 'plugin_not_allowed',
 					// phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
-					'errorMessage' => __( 'This plugin cannot be installed from here.', 'country-code-field-for-elementor-form' ),
+					'errorMessage' => __( 'This plugin cannot be installed from here.', 'sb-elementor-contact-form-db' ),
 				));
 			}
 
@@ -478,6 +489,7 @@ if (! class_exists('FDBGP_Marketing_Controllers')) {
 
 						if (current_user_can('activate_plugin', $install_status['file'])) {
 
+							$this->fdbgp_set_install_by_option( $plugin_slug );
 							$network_wide = (is_multisite() && 'import' !== $pagenow);
 							$activation_result = activate_plugin($install_status['file'], '', $network_wide);
 							if (is_wp_error($activation_result)) {
@@ -518,6 +530,9 @@ if (! class_exists('FDBGP_Marketing_Controllers')) {
 				$install_status = install_plugin_install_status($api);
 				$pagenow        = isset($_POST['pagenow']) ? sanitize_key($_POST['pagenow']) : '';
 
+				// Set install-by option before activation (some plugins redirect on activate and exit).
+				$this->fdbgp_set_install_by_option( $plugin_slug );
+
 				// 🔄 Auto-activate the plugin right after successful install
 				if (current_user_can('activate_plugin', $install_status['file']) && is_plugin_inactive($install_status['file'])) {
 
@@ -532,6 +547,7 @@ if (! class_exists('FDBGP_Marketing_Controllers')) {
 						$status['activated'] = true;
 					}
 				}
+
 				wp_send_json_success($status);
 			}
 		}

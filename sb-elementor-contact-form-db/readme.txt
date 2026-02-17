@@ -5,10 +5,10 @@ Tags: elementor forms, google sheets, form submissions, contact form db, form en
 Requires at least: 5.0
 Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 2.1.6
+Stable tag: 2.1.7
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
-Elementor tested up to: 3.35.3
+Elementor tested up to: 3.35.4
 Elementor Pro tested up to: 3.35.0
 
 Connect Elementor forms with Google Sheets to sync form entries, or save form submissions in any post type using Elementor Pro or Hello Plus forms.
@@ -97,15 +97,8 @@ Translate WordPress plugins and themes automatically using AI with one-click str
 
 FormsDB is a fully open-source plugin. You can view the complete source code on GitHub - https://github.com/CoolPluginsTeam/sb-elementor-contact-form-db
 
-#### Third-Party Libraries
-
-This plugin uses the **Google APIs Client Library for PHP** for Google Sheets integration.
-
-* Library: Google APIs Client Library for PHP  
-* Source: https://github.com/googleapis/google-api-php-client  
-* License: Apache License 2.0  
-* License URL: https://www.apache.org/licenses/LICENSE-2.0
-
+**Use of 3rd Party Services:** This plugin connects to the Cool Plugins feedback server only for optional usage data sharing and voluntary feedback submission (for example, during plugin deactivation). Data is transmitted solely after explicit user consent. No hidden tracking is performed, and no frontend visitor or site user data is collected.  For more details, please review our [Data Usage Policy](https://my.coolplugins.net/terms/usage-tracking/), [TOS](https://my.coolplugins.net/terms/), and [Privacy Policy](https://my.coolplugins.net/terms/privacy-policy/) and this plugin also uses
+[**Google APIs Client Library for PHP**](https://github.com/googleapis/google-api-php-client) for Google Sheets integration, which is licensed under [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0).
 
 == Screenshots ==
 
@@ -216,6 +209,11 @@ https://youtu.be/CV3ZtcOVWzU
 👉 [FormsDB Video Tutorials](https://docs.coolplugins.net/doc/formsdb-video-tutorials/?utm_source=formsdb&utm_medium=readme&utm_campaign=docs&utm_content=installation)
 
 == Changelog ==
+
+= 2.1.7 (Feb 17, 2026) =
+* Added support to save Cool FormKit Lite form submissions to Google Sheets and a post type.
+* Improved Other plugin recommendations for Elementor users.
+* Fixed issues reported by “Plugin Check” plugin.
 
 = 2.1.6 (Feb 06, 2026) =
 * Improved code quality.

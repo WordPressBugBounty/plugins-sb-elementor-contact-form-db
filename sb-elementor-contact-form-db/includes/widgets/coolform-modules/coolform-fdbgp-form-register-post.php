@@ -1,0 +1,294 @@
+<?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+/**
+ * Register post after form submit.
+ * Works with both Cool Form (extensions-for-elementor-form) and Cool FormKit Pro.
+ */
+
+use Elementor\Plugin as ElementorPlugin;
+use Elementor\Controls_Manager as ElementorControls;
+use Elementor\Repeater as ElementorRepeater;
+
+/**
+ * Shared implementation for Cool Form / Cool FormKit Pro Register Post action.
+ */
+// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedClassFound
+trait CoolForm_FDBGP_Register_Post_Trait {
+
+	private static $registered_actions = [];
+
+	public function __construct() {
+		add_action( 'elementor/element/cool-form/section_form_fields/before_section_end', array( $this, 'add_control_fields' ), 100, 2 );
+	}
+
+	/**
+	 * Get Name
+	 *
+	 * @return string
+	 */
+	public function get_name() : string {
+		return 'eef-register-post';
+	}
+
+	/**
+	 * Get Label
+	 *
+	 * @return string
+	 */
+	public function get_label() : string {
+		return 'Save Submissions In Post Type';
+	}
+
+	/**
+	 * Get public post types
+	 */
+	private function get_registered_post_types() {
+		$registered_post_types = get_post_types( array( 'public' => true ), 'objects' );
+		$post_type_options     = array();
+		foreach ( $registered_post_types as $post_type ) {
+			$post_type_options[ $post_type->name ] = $post_type->label;
+		}
+		return $post_type_options;
+	}
+
+	/**
+	 * Register Settings Section
+	 *
+	 * @param \Elementor\Widget_Base $widget
+	 */
+	public function register_settings_section( $widget ) {
+		$control_id = 'eef-register-post-section';
+		if ( in_array( $control_id, self::$registered_actions, true ) ) {
+			return;
+		}
+
+		self::$registered_actions[] = $control_id;
+
+		$widget->start_controls_section(
+			'eef-register-post-section',
+			[
+				'label'     => \esc_html__( 'Save Submissions In Post Type', 'sb-elementor-contact-form-db' ),
+				'condition' => [
+					'submit_actions' => $this->get_name(),
+				],
+			]
+		);
+
+		$widget->add_control(
+			'eef-register-post-info',
+			[
+				'type'            => \Elementor\Controls_Manager::RAW_HTML,
+				'raw'             => \esc_html__( 'Important: To save form fields as post data, you must map each field from the "Advanced" tab of the respective form field settings.', 'sb-elementor-contact-form-db' ),
+				'content_classes' => 'elementor-panel-alert elementor-panel-alert-info',
+			]
+		);
+
+		$widget->add_control(
+			'eef-register-post-post-type',
+			[
+				'label'   => \esc_html__( 'Post Type', 'sb-elementor-contact-form-db' ),
+				'type'    => \Elementor\Controls_Manager::SELECT,
+				'default' => 'post',
+				'options' => $this->get_registered_post_types(),
+			]
+		);
+
+		$widget->add_control(
+			'eef-register-post-post-status',
+			[
+				'label'   => \esc_html__( 'Post Status', 'sb-elementor-contact-form-db' ),
+				'type'    => \Elementor\Controls_Manager::SELECT,
+				'default' => 'draft',
+				'options' => [
+					'draft'   => \esc_html__( 'Draft', 'sb-elementor-contact-form-db' ),
+					'publish' => \esc_html__( 'Publish', 'sb-elementor-contact-form-db' ),
+					'pending' => \esc_html__( 'Pending', 'sb-elementor-contact-form-db' ),
+				],
+			]
+		);
+
+		$widget->add_control(
+			'eef-register-post-user-permission',
+			[
+				'label'         => \esc_html__( 'Run only to logged in users?', 'sb-elementor-contact-form-db' ),
+				'type'          => \Elementor\Controls_Manager::SWITCHER,
+				'label_on'      => \esc_html__( 'Yes', 'sb-elementor-contact-form-db' ),
+				'label_off'     => \esc_html__( 'No', 'sb-elementor-contact-form-db' ),
+				'return_value'  => 'yes',
+				'default'       => 'yes',
+				'description'   => \esc_html__( 'Warning: Save data from not logged in users can be a security risk', 'sb-elementor-contact-form-db' ),
+			]
+		);
+
+		$widget->end_controls_section();
+	}
+
+	/**
+	 * On Export
+	 *
+	 * @param array $element
+	 */
+	public function on_export( $element ) {
+		unset(
+			$element['settings']['eef-register-post-post-type'],
+			$element['settings']['eef-register-post-post-status'],
+			$element['settings']['eef-register-post-user-permission'],
+		);
+		return $element;
+	}
+
+	/**
+	 * Runs the action after submit
+	 *
+	 * @param \ElementorPro\Modules\Forms\Classes\Form_Record $record
+	 * @param \ElementorPro\Modules\Forms\Classes\Ajax_Handler $ajax_handler
+	 */
+	public function run( $record, $ajax_handler ) {
+		$new_post_data = array(
+			'post_type'    => $record->get_form_settings( 'eef-register-post-post-type' ),
+			'post_status'  => $record->get_form_settings( 'eef-register-post-post-status' ),
+			'post_title'   => $record->get_form_settings( 'form_name' ),
+			'post_content' => $record->get_form_settings( 'form_name' ),
+		);
+
+		$form_fields      = $record->get( 'fields' );
+		$fields_settings  = $record->get_form_settings( 'form_fields' );
+		$formated_fields  = array();
+		foreach ( $fields_settings as $key => $field ) {
+			$formated_fields[ $key ] = $form_fields[ $field['custom_id'] ];
+			$formated_fields[ $key ]['field-to-register']         = $field['eef-register-post-field'];
+			$formated_fields[ $key ]['custom-field-to-register']  = $field['eef-register-post-custom-field'];
+		}
+
+		$custom_fields_to_register = array();
+		foreach ( $formated_fields as $field ) {
+			if ( $field['field-to-register'] !== 'custom_field' ) {
+				$new_post_data[ $field['field-to-register'] ] = $field['value'];
+			} else {
+				$custom_fields_to_register[ $field['custom-field-to-register'] ] = $field['value'];
+			}
+		}
+
+		$is_restrict_to_loggedin_users = $record->get_form_settings( 'eef-register-post-user-permission' );
+		if ( $is_restrict_to_loggedin_users !== 'yes' ) {
+			$post_id = wp_insert_post( $new_post_data, true );
+			if ( ! is_wp_error( $post_id ) ) {
+				foreach ( $custom_fields_to_register as $meta_key => $meta_value ) {
+					add_post_meta( $post_id, $meta_key, $meta_value );
+				}
+			}
+			return;
+		}
+
+		if ( is_user_logged_in() ) {
+			$post_id = wp_insert_post( $new_post_data, true );
+			if ( ! is_wp_error( $post_id ) ) {
+				foreach ( $custom_fields_to_register as $meta_key => $meta_value ) {
+					add_post_meta( $post_id, $meta_key, $meta_value );
+				}
+			}
+		}
+	}
+
+	/**
+	 * Add create post fields
+	 *
+	 * @param object $element
+	 * @param array  $args
+	 */
+	public function add_control_fields( $element, $args ) {
+		$widget_name = $element->get_name();
+		if ( $widget_name !== 'cool-form' ) {
+			return;
+		}
+
+		$elementor    = \Elementor\Plugin::$instance;
+		$control_data = $elementor->controls_manager->get_control_from_stack( $element->get_name(), 'form_fields' );
+
+		if ( is_wp_error( $control_data ) ) {
+			return;
+		}
+
+		$new_control = [
+			'label'       => \esc_html__( 'Field to Register', 'sb-elementor-contact-form-db' ),
+			'type'       => ElementorControls::SELECT,
+			'tab'        => 'content',
+			'tabs_wrapper' => 'form_fields_tabs',
+			'inner_tab'  => 'form_fields_advanced_tab',
+			'classes'    => 'elementor-hidden-control',
+			'description' => \esc_html__( 'Use this input to define what post field will receive this data when post is registered', 'sb-elementor-contact-form-db' ),
+			'default'    => 'select',
+			'options'    => [
+				'select'       => \esc_html__( 'Select', 'sb-elementor-contact-form-db' ),
+				'post_title'   => \esc_html__( 'Post Title', 'sb-elementor-contact-form-db' ),
+				'post_content' => \esc_html__( 'Post Content', 'sb-elementor-contact-form-db' ),
+				'post_excerpt' => \esc_html__( 'Post Excerpt', 'sb-elementor-contact-form-db' ),
+				'post_author'  => \esc_html__( 'Post Author', 'sb-elementor-contact-form-db' ),
+				'custom_field' => \esc_html__( 'Custom Field', 'sb-elementor-contact-form-db' ),
+			],
+		];
+
+		$new_control_2 = [
+			'label'       => \esc_html__( 'Custom Field Name', 'sb-elementor-contact-form-db' ),
+			'type'        => ElementorControls::TEXT,
+			'placeholder' => \esc_html__( 'custom_field_name', 'sb-elementor-contact-form-db' ),
+			'tab'         => 'content',
+			'tabs_wrapper' => 'form_fields_tabs',
+			'inner_tab'   => 'form_fields_advanced_tab',
+			'description' => \esc_html__( 'Add the Custom Field name here. You can use default fields or custom created with ACF or similars', 'sb-elementor-contact-form-db' ),
+			'condition'   => [
+				'eef-register-post-field' => 'custom_field',
+			],
+		];
+
+		$mask_control = new ElementorRepeater();
+		$mask_control->add_control( 'eef-register-post-field', $new_control );
+		$mask_control->add_control( 'eef-register-post-custom-field', $new_control_2 );
+		$pattern_field = $mask_control->get_controls();
+
+		$this->register_control_in_form_advanced_tab( $element, $control_data, $pattern_field );
+	}
+
+	/**
+	 * Register control in form advanced tab
+	 *
+	 * @param object $element
+	 * @param array  $control_data
+	 * @param array  $pattern_field
+	 */
+	public function register_control_in_form_advanced_tab( $element, $control_data, $pattern_field ) {
+		foreach ( $pattern_field as $key => $control ) {
+			if ( $key !== '_id' ) {
+				$new_order = array();
+				foreach ( $control_data['fields'] as $field_key => $field ) {
+					if ( 'field_value' === $field['name'] ) {
+						$new_order[ $key ] = $control;
+					}
+					$new_order[ $field_key ] = $field;
+				}
+				$control_data['fields'] = $new_order;
+			}
+		}
+		return $element->update_control( 'form_fields', $control_data );
+	}
+}
+
+/*
+ * Define the action class only when the corresponding Cool Form plugin is active.
+ * No top-level "use" for Action_Base — we extend the correct base via class_exists() to avoid
+ * "Class not found" when the other plugin is inactive.
+ */
+if ( class_exists( 'Cool_FormKit_Pro\Modules\Forms\Classes\Action_Base' ) ) {
+	// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedClassFound
+	class CoolForm_FDBGP_Register_Post extends \Cool_FormKit_Pro\Modules\Forms\Classes\Action_Base {
+		use CoolForm_FDBGP_Register_Post_Trait;
+	}
+} elseif ( class_exists( 'Cool_FormKit\Modules\Forms\Classes\Action_Base' ) ) {
+	// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedClassFound
+	class CoolForm_FDBGP_Register_Post extends \Cool_FormKit\Modules\Forms\Classes\Action_Base {
+		use CoolForm_FDBGP_Register_Post_Trait;
+	}
+}

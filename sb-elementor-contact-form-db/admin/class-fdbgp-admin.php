@@ -94,6 +94,49 @@ if(!class_exists('FDBGP_Admin')) {
             add_action( 'wp_ajax_fdbgp_plugin_activate', array($this, 'fdbgp_plugin_activate') );
         }
 
+
+        private function get_first_plugin_source(): string {
+            $form_mask_installed_date              = get_option( 'fme-installDate' );
+            $conditional_fields_installed_date     = get_option( 'cfef-installDate' );
+            $conditional_fields_pro_installed_date = get_option( 'cfefp-installDate' );
+            $country_code_installed_date           = get_option( 'ccfef-installDate' );
+            $formsdb_installed_date                = get_option( 'formsdb-installDate' );
+
+            // New: read stored oldest plugin (set once)
+            $stored_oldest_plugin = get_option( 'oldest_plugin' );
+
+            $plugins_dates = [
+                'fim_plugin'   => $form_mask_installed_date,
+                'cfef_plugin'  => $conditional_fields_installed_date,
+                'cfefp_plugin' => $conditional_fields_pro_installed_date,
+                'ccfef_plugin' => $country_code_installed_date,
+                'formsdb'      => $formsdb_installed_date,
+            ];
+
+            $plugins_dates = array_filter( $plugins_dates );
+
+            $install_by_plugin = get_option( 'sb-elementor-install-by' );
+
+            if ( ! empty( $install_by_plugin ) ) {
+                $first_plugin = $install_by_plugin;
+            } elseif ( ! empty( $stored_oldest_plugin ) ) {
+                $first_plugin = $stored_oldest_plugin;
+            } else {
+                if ( ! empty( $plugins_dates ) ) {
+                    asort( $plugins_dates );
+                    $first_plugin = key( $plugins_dates );
+                } else {
+                    $first_plugin = 'formsdb';
+                }
+
+                // Store it so it never changes on re-install
+                update_option( 'oldest_plugin', $first_plugin );
+            }
+
+            return $first_plugin;
+        }
+
+
         public function fdbgp_plugin_activate(){
             check_ajax_referer( 'fdbgp_plugin_nonce', 'security' );
             if ( ! current_user_can( 'activate_plugins' ) ) {
@@ -211,7 +254,7 @@ if(!class_exists('FDBGP_Admin')) {
                         ?>
                     
                         <span>Unlock advanced fields and features for Elementor Forms.</span>
-                        <a href="https://coolformkit.com/features/?utm_source=formsdb&utm_medium=inside&utm_campaign=demo&utm_content=setting_page_header" class="button button-primary fdbgp-try-cool-form" target="_blank"><?php 
+                        <a href="https://coolformkit.com/features/?utm_source=<?php echo esc_attr($this->get_first_plugin_source()); ?>&utm_medium=inside&utm_campaign=demo&utm_content=setting_page_header" class="button button-primary fdbgp-try-cool-form" target="_blank"><?php 
                             esc_html_e('Try Cool FormKit for Elementor', 'sb-elementor-contact-form-db');?></a>
 
                         <?php else: ?>

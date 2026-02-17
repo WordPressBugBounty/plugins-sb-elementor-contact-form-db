@@ -43,6 +43,9 @@ if(!class_exists('FDBGP_Loader')) {
 
             require_once FDBGP_PLUGIN_DIR . 'includes/widgets/helloplus-widget-loader.php';
             new HelloPlus_Widget_Loader();
+
+            require_once FDBGP_PLUGIN_DIR . 'includes/widgets/coolform-widget-loader.php';
+            new CoolForm_Widget_Loader();
         }
 
         private function admin_menu_dashboard() {
