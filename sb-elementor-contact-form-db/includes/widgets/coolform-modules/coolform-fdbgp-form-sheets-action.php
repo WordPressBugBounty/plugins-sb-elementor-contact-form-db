@@ -319,11 +319,14 @@ trait CoolForm_FDBGP_Form_Sheets_Action_Trait {
                 $fdbgp_value_data = array();
                 foreach ( $fdbgp_headers as $fdbgp_fieldvalue ) {
                     if ( array_key_exists( $fdbgp_fieldvalue, $fdbgp_fields ) ) {
-                        if ( is_array( $fdbgp_fields[ $fdbgp_fieldvalue ] ) ) {
-                            $fdbgp_value_data[] = implode( ',', $fdbgp_fields[ $fdbgp_fieldvalue ] );
-                        } else {
-                            $fdbgp_value_data[] = $fdbgp_fields[ $fdbgp_fieldvalue ];
+                        $cell_value = is_array( $fdbgp_fields[ $fdbgp_fieldvalue ] )
+                            ? implode( ',', $fdbgp_fields[ $fdbgp_fieldvalue ] )
+                            : $fdbgp_fields[ $fdbgp_fieldvalue ];
+                        $cell_value = is_scalar( $cell_value ) ? (string) $cell_value : '';
+                        if ( $cell_value !== '' && preg_match( '/^[=+\-@]/', $cell_value ) ) {
+                            $cell_value = "'" . $cell_value;
                         }
+                        $fdbgp_value_data[] = $cell_value;
                     } else {
                         $fdbgp_value_data[] = '';
                     }
@@ -357,7 +360,11 @@ trait CoolForm_FDBGP_Form_Sheets_Action_Trait {
                 $instance_api->appendentry( $param );
 
             } catch ( \Exception $e ) {
-                $ajax_handler->add_admin_error_message( 'Error: ' . $e->getMessage() );
+                // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
+                error_log( 'FormsDB Google Sheets error: ' . $e->getMessage() );
+                $ajax_handler->add_admin_error_message(
+                    esc_html__( 'Could not save submission to Google Sheet. Please contact the site admin.', 'sb-elementor-contact-form-db' )
+                );
             }
         }
     }
@@ -465,7 +472,7 @@ trait CoolForm_FDBGP_Form_Sheets_Action_Trait {
             } else {
                 $fdbgp_html = sprintf(
                     '<div class="elementor-control-raw-html elementor-panel-alert elementor-panel-alert-danger">%1$s</div>',
-                    'Error: ' . $fdbgp_error
+                    esc_html( 'Error: ' . $fdbgp_error )
                 );
             }
             $widget->start_controls_section(

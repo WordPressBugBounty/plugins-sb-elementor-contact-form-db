@@ -34,9 +34,14 @@ class fdbgp_feedback {
 	}
 
 	public function fdbgp_dismiss_review_notice(){
-		$rs = update_option( $this->review_option, 'yes' );
-		echo json_encode( array( 'success' => 'true' ) );
-		exit;
+		check_ajax_referer( 'fdbgp_dismiss_notice', 'nonce' );
+
+		if ( ! current_user_can( 'update_plugins' ) ) {
+			wp_send_json_error();
+		}
+
+		update_option( $this->review_option, 'yes' );
+		wp_send_json_success();
 	}
 
 	public function fdbgp_admin_notice_for_review(){
@@ -101,6 +106,13 @@ class fdbgp_feedback {
 		wp_enqueue_style( 'fdbgp-admin-review-notice-css', $this->plugin_url . 'admin/feedback/css/fdbgp-admin-review-notice.css', null, $this->plugin_version );
 
 		wp_enqueue_script( 'fdbgp-admin-review-notice-js', $this->plugin_url . 'admin/feedback/js/fdbgp-admin-review-notice.js', array( 'jquery' ), $this->plugin_version , false);
+		wp_localize_script(
+			'fdbgp-admin-review-notice-js',
+			'fdbgpReviewNotice',
+			array(
+				'nonce' => wp_create_nonce( 'fdbgp_dismiss_notice' ),
+			)
+		);
 	}
 
 	function fdbgp_get_user_info() {
@@ -283,8 +295,8 @@ class fdbgp_feedback {
 				array(
                     'timeout' => 30,
                         'body'    => array(
-                        'server_info' => serialize($this->fdbgp_get_user_info()['server_info']),
-                        'extra_details' => serialize($this->fdbgp_get_user_info()['extra_details']),
+                        'server_info' => wp_json_encode($this->fdbgp_get_user_info()['server_info']),
+                        'extra_details' => wp_json_encode($this->fdbgp_get_user_info()['extra_details']),
                         'plugin_initial'  => isset($plugin_initial) ? sanitize_text_field($plugin_initial) : 'N/A',
                         'plugin_version' => sanitize_text_field($this->plugin_version),
                         'plugin_name'    => sanitize_text_field($this->plugin_name),
@@ -297,7 +309,11 @@ class fdbgp_feedback {
                 )
 			);
 
-			die( json_encode( array( 'response' => $response ) ) );
+			if ( is_wp_error( $response ) ) {
+				wp_send_json_error();
+			}
+
+			wp_send_json_success();
 		}
 
 	}

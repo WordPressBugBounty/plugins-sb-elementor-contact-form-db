@@ -73,7 +73,7 @@ class FDBGP_Dashboard {
                 $callback,
                 $position
             );
-        }, 999);
+        }, 1000);
     }
 
 
@@ -172,7 +172,7 @@ class FDBGP_Dashboard {
     private static function fdbgp_current_page($slug)
     {
         // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only for current page detection, no data modification.
-        $current_page = isset($_REQUEST['page']) ? sanitize_key($_REQUEST['page']) : (isset($_REQUEST['post_type']) ? sanitize_key($_REQUEST['post_type']) : '');
+        $current_page = isset($_REQUEST['page']) ? sanitize_key( wp_unslash( $_REQUEST['page'] ) ) : (isset($_REQUEST['post_type']) ? sanitize_key( wp_unslash( $_REQUEST['post_type'] ) ) : '');
         $status=false;
 
         if (in_array($current_page, self::get_allowed_pages()) && $current_page === $slug) {

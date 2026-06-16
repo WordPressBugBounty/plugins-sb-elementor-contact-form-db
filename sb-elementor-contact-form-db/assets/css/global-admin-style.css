@@ -4,3 +4,6 @@ a[href="admin.php?page=elementor-forms-addons"] {
 li a[href="admin.php?page=cfkef-entries"]{
     display: none !important;
 }
+a[href*="page=formsdb"] div p {
+    font-style: italic;
+}

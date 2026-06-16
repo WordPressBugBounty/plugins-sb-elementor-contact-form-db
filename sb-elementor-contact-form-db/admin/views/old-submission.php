@@ -25,6 +25,10 @@ class FDBGP_Old_Submission_View {
     }
 
     private function render_page() {
+        if ( ! current_user_can( 'manage_options' ) ) {
+            return;
+        }
+
         $forms = $this->helper->get_submitted_pages();
         $form_ids = $this->helper->get_form_ids();
         $total_count = $this->helper->get_submission_count();
@@ -99,8 +103,8 @@ class FDBGP_Old_Submission_View {
                 <p style="margin-bottom: 5px;"><?php esc_html_e('Here you can view all form submissions that were saved using the legacy method supported in plugin version 1.8.1 or earlier.', 'sb-elementor-contact-form-db'); ?></p>
                 
                 <ul class="subsubsub">
-                    <li class="all"><a href="<?php echo esc_url(remove_query_arg(array('status', 'paged'))); ?>" class="<?php echo $status === 'publish' ? 'current' : ''; ?>"><?php esc_html_e('All', 'sb-elementor-contact-form-db'); ?> <span class="count">(<?php echo intval($count_publish); ?>)</span></a> |</li>
-                    <li class="trash"><a href="<?php echo esc_url(add_query_arg('status', 'trash', remove_query_arg('paged'))); ?>" class="<?php echo $status === 'trash' ? 'current' : ''; ?>"><?php esc_html_e('Trash', 'sb-elementor-contact-form-db'); ?> <span class="count">(<?php echo intval($count_trash); ?>)</span></a></li>
+                    <li class="all"><a href="<?php echo esc_url(remove_query_arg(array('status', 'paged'))); ?>" class="<?php echo esc_attr( $status === 'publish' ? 'current' : '' ); ?>"><?php esc_html_e('All', 'sb-elementor-contact-form-db'); ?> <span class="count">(<?php echo intval($count_publish); ?>)</span></a> |</li>
+                    <li class="trash"><a href="<?php echo esc_url(add_query_arg('status', 'trash', remove_query_arg('paged'))); ?>" class="<?php echo esc_attr( $status === 'trash' ? 'current' : '' ); ?>"><?php esc_html_e('Trash', 'sb-elementor-contact-form-db'); ?> <span class="count">(<?php echo intval($count_trash); ?>)</span></a></li>
                 </ul>
                 
                 <?php if ($submissions_query->have_posts()): ?>
@@ -135,7 +139,7 @@ class FDBGP_Old_Submission_View {
                                     }
                                 ?>
                                     <tr>
-                                        <td><?php echo get_the_date('Y-m-d H:i:s'); ?></td>
+                                        <td><?php echo esc_html(get_the_date('Y-m-d H:i:s')); ?></td>
                                         <td>
                                             <strong><?php echo esc_html($display_name); ?></strong><br>
                                             <small><?php 
@@ -156,8 +160,8 @@ class FDBGP_Old_Submission_View {
                                             <?php if ($status === 'publish'): ?>
                                                 <button type="button" class="button button-secondary fdbgp-view-submission" 
                                                     data-id="<?php echo esc_attr($post_id); ?>" 
-                                                    data-data="<?php echo esc_attr(json_encode($meta['data'])); ?>"
-                                                    data-extra="<?php echo esc_attr(json_encode(isset($meta['extra']) ? $meta['extra'] : array())); ?>"
+                                                    data-data="<?php echo esc_attr( wp_json_encode( $meta['data'] ) ); ?>"
+                                                    data-extra="<?php echo esc_attr( wp_json_encode( isset( $meta['extra'] ) ? $meta['extra'] : array() ) ); ?>"
                                                     data-date="<?php echo esc_attr(get_the_date('Y-m-d H:i:s')); ?>"
                                                     data-permalink="<?php echo esc_attr(get_permalink($meta['extra']['submitted_on_id'])); ?>"
                                                 >
@@ -248,8 +252,7 @@ class FDBGP_Old_Submission_View {
                     printf(
                         /* translators: %d: number of old form submissions */
                         esc_html__('You have %d old form submission(s) stored in the database.', 'sb-elementor-contact-form-db'),
-                        // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped 
-                        $total_count
+                        (int) $total_count
                     ); 
                     ?>
                 </p>
@@ -265,10 +268,9 @@ class FDBGP_Old_Submission_View {
                                     ksort($forms);
                                     foreach ($forms as $form => $label): 
                                         // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-                                        $selected = isset($_REQUEST['form_name']) && sanitize_text_field(wp_unslash($_REQUEST['form_name'])) == $form ? 'selected="selected"' : '';
+                                        $is_selected = isset($_REQUEST['form_name']) && sanitize_text_field(wp_unslash($_REQUEST['form_name'])) === $form;
                                     ?>
-                                        <?php // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-                                        <option <?php echo $selected; ?> value="<?php echo esc_attr($form); ?>">
+                                        <option <?php selected( $is_selected, true ); ?> value="<?php echo esc_attr($form); ?>">
                                             <?php echo esc_html($label); ?>
                                         </option>
                                     <?php endforeach; ?>
@@ -289,10 +291,9 @@ class FDBGP_Old_Submission_View {
                                     ksort($form_ids);
                                     foreach ($form_ids as $form): 
                                         // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-                                        $selected = isset($_REQUEST['form_id']) && $_REQUEST['form_id'] == $form ? 'selected="selected"' : '';
+                                        $is_selected = isset($_REQUEST['form_id']) && sanitize_text_field(wp_unslash($_REQUEST['form_id'])) === $form;
                                     ?>
-                                    <?php // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-                                        <option <?php echo $selected; ?> value="<?php echo esc_attr($form); ?>">
+                                        <option <?php selected( $is_selected, true ); ?> value="<?php echo esc_attr($form); ?>">
                                             <?php echo esc_html($form); ?>
                                         </option>
                                     <?php endforeach; ?>
@@ -325,6 +326,18 @@ class FDBGP_Old_Submission_View {
         </div>
 
         <script>
+            function fdbgpEscapeHtml(str) {
+                if (str === null || str === undefined) {
+                    return '';
+                }
+                return String(str)
+                    .replace(/&/g, '&amp;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;')
+                    .replace(/"/g, '&quot;')
+                    .replace(/'/g, '&#039;');
+            }
+
             jQuery(document).ready(function($) {
                 $('.fdbgp-view-submission').on('click', function() {
                     var data = $(this).data('data');
@@ -336,15 +349,15 @@ class FDBGP_Old_Submission_View {
                     
                     // Add Meta Info
                     if (date) {
-                         html += '<tr><td><strong><?php esc_html_e('Date of Submission', 'sb-elementor-contact-form-db'); ?></strong></td><td>' + date + '</td></tr>';
+                         html += '<tr><td><strong><?php esc_html_e('Date of Submission', 'sb-elementor-contact-form-db'); ?></strong></td><td>' + fdbgpEscapeHtml(date) + '</td></tr>';
                     }
                     
                     if (typeof extra === 'object') {
                         if (extra.submitted_on) {
-                             html += '<tr><td><strong><?php esc_html_e('Submitted On', 'sb-elementor-contact-form-db'); ?></strong></td><td><a target="_blank" href="' + permalink + '">' + extra.submitted_on + '</a></td></tr>';
+                             html += '<tr><td><strong><?php esc_html_e('Submitted On', 'sb-elementor-contact-form-db'); ?></strong></td><td><a target="_blank" href="' + fdbgpEscapeHtml(permalink) + '">' + fdbgpEscapeHtml(extra.submitted_on) + '</a></td></tr>';
                         }
                         if (extra.submitted_by) {
-                             html += '<tr><td><strong><?php esc_html_e('Submitted By', 'sb-elementor-contact-form-db'); ?></strong></td><td>' + extra.submitted_by + '</td></tr>';
+                             html += '<tr><td><strong><?php esc_html_e('Submitted By', 'sb-elementor-contact-form-db'); ?></strong></td><td>' + fdbgpEscapeHtml(extra.submitted_by) + '</td></tr>';
                         }
                     }
 
@@ -353,7 +366,7 @@ class FDBGP_Old_Submission_View {
 
                     if (typeof data === 'object') {
                         $.each(data, function(key, field) {
-                             html += '<tr><td><strong>' + field.label + '</strong></td><td>' + field.value + '</td></tr>';
+                             html += '<tr><td><strong>' + fdbgpEscapeHtml(field.label) + '</strong></td><td>' + fdbgpEscapeHtml(field.value) + '</td></tr>';
                         });
                     }
                     
@@ -438,9 +451,21 @@ class FDBGP_Old_Submission_View {
                         <div class="fdbgp-step-number">ℹ️</div>
                         <div class="fdbgp-step-content">
                             <h3><?php esc_html_e('Enable New Submissions (Recommended)', 'sb-elementor-contact-form-db'); ?></h3>
-                            <p><?php esc_html_e('If you prefer the new method, disable legacy saving from this page. Then edit your form in Elementor and enable the Save Submission action.
-                            
-                            New entries will appear in <a href="admin.php?page=e-form-submissions" target="_blank">Elementor → Submissions</a>.', 'sb-elementor-contact-form-db'); ?></p>
+                            <p><?php
+                            printf(
+                                wp_kses(
+                                    /* translators: %s: Link to Elementor Submissions admin page. */
+                                    __( 'If you prefer the new method, disable legacy saving from this page. Then edit your form in Elementor and enable the Save Submission action. New entries will appear in <a href="%1$s" target="_blank">Elementor → Submissions</a>.', 'sb-elementor-contact-form-db' ),
+                                    array(
+                                        'a' => array(
+                                            'href'   => array(),
+                                            'target' => array(),
+                                        ),
+                                    )
+                                ),
+                                esc_url( admin_url( 'admin.php?page=e-form-submissions' ) )
+                            );
+                            ?></p>
                         </div>
                     </div>
     

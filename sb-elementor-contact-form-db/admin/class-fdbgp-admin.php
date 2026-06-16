@@ -152,6 +152,11 @@ if(!class_exists('FDBGP_Admin')) {
             }
     
             $init_file = sanitize_text_field( wp_unslash($_POST['init']) );
+
+            $installed_plugins = array_keys( get_plugins() );
+            if ( ! in_array( $init_file, $installed_plugins, true ) ) {
+                wp_send_json_error( [ 'message' => 'Invalid plugin file.' ] );
+            }
     
             // Use silent activation to prevent redirection hooks from breaking AJAX response
             $activate = activate_plugin( $init_file, '', false, true );
@@ -170,6 +175,8 @@ if(!class_exists('FDBGP_Admin')) {
             if ( ! current_user_can( 'edit_pages' ) ) {
                 wp_die( 'Insufficient permissions' );
             }
+
+            check_admin_referer( 'fdbgp_create_elementor_page' );
 
             $post_data = array(
                 'post_title'  => 'New Elementor Form',
@@ -325,7 +332,28 @@ if(!class_exists('FDBGP_Admin')) {
         }
 
         public function enqueue_admin_styles() {
+            if ( ! function_exists( 'is_plugin_active' ) ) {
+                include_once ABSPATH . 'wp-admin/includes/plugin.php';
+            }
+
             $is_conflicting_active = is_plugin_active( 'cool-formkit-for-elementor-forms/cool-formkit-for-elementor-forms.php' ) || is_plugin_active( 'extensions-for-elementor-form/extensions-for-elementor-form.php' );
+            $show_entries          = is_plugin_active( 'hello-plus/hello-plus.php' ) &&
+                ! is_plugin_active( 'cool-formkit-for-elementor-forms/cool-formkit-for-elementor-forms.php' ) &&
+                ! is_plugin_active( 'extensions-for-elementor-form/extensions-for-elementor-form.php' );
+
+            wp_enqueue_script( 'fdbgp-admin-script', FDBGP_PLUGIN_URL . 'assets/js/admin-script.js', array( 'jquery' ), $this->version, true );
+            wp_localize_script(
+                'fdbgp-admin-script',
+                'fdbgp_plugin_vars',
+                array(
+                    'nonce'            => wp_create_nonce( 'fdbgp_plugin_nonce' ),
+                    'ajaxurl'          => admin_url( 'admin-ajax.php' ),
+                    'installNonce'     => wp_create_nonce( 'updates' ),
+                    'showEntries'      => $show_entries,
+                    'formsdbMenuLabel' => $is_conflicting_active ? '↳ FormsDB' : 'FormsDB',
+                )
+            );
+
             if(!$is_conflicting_active){
                 wp_enqueue_style('fdbgp-admin-global-style', FDBGP_PLUGIN_URL . 'assets/css/global-admin-style.css', array(), $this->version, 'all');
             }else{
@@ -334,7 +362,6 @@ if(!class_exists('FDBGP_Admin')) {
                     li a[href="admin.php?page=formsdb"] {
                         padding-left: 10px;
                         font-style: italic;
-                        opacity: 0.85;
                     }
                 </style>
                 <?php
@@ -345,10 +372,11 @@ if(!class_exists('FDBGP_Admin')) {
             if ( $screen && 'elementor_page_e-form-submissions' === $screen->id ) {
                 $button_text = __('Save To Google Sheet', 'sb-elementor-contact-form-db');
                 $button_url = esc_url(admin_url('admin.php?page=formsdb'));
-                
+                $button_html = '<a href="' . $button_url . '" target="_blank" class="button button-primary">' . $button_text . '</a>';
+
                 $custom_js = "
                     jQuery(document).ready(function($) {
-                        var button = '<a href=\"{$button_url}\" target=\"_blank\" class=\"button button-primary\">{$button_text}</a>';
+                        var button = " . wp_json_encode( $button_html ) . ";
                         $('#e-form-submissions .e-form-submissions-search').prepend(button);
                     });
                 ";
@@ -362,16 +390,6 @@ if(!class_exists('FDBGP_Admin')) {
                 wp_enqueue_style('dashicons');
 
                 wp_enqueue_style('fdbgp-admin-style', FDBGP_PLUGIN_URL . 'assets/css/admin-style.css', array(), $this->version, 'all');
-                
-                wp_enqueue_script('fdbgp-admin-script', FDBGP_PLUGIN_URL . 'assets/js/admin-script.js', array('jquery'), $this->version, true); 
-
-                wp_localize_script( 'fdbgp-admin-script', 'fdbgp_plugin_vars', [
-                    'nonce' => wp_create_nonce( 'fdbgp_plugin_nonce' ),
-                    'ajaxurl' => admin_url( 'admin-ajax.php' ),
-                    'installNonce' => wp_create_nonce( 'updates' ),
-                ] );
-            } elseif ( strpos( $current_page, 'cool-formkit' ) !== false ) {
-                wp_enqueue_script('fdbgp-admin-script', FDBGP_PLUGIN_URL . 'assets/js/admin-script.js', array('jquery'), $this->version, true); 
             }
         }
     }

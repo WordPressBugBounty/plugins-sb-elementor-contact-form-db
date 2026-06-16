@@ -1,5 +1,69 @@
 jQuery(document).ready(function ($) {
 
+    function getFormsDbInsertAnchor($submenu, $elementorEditorPage) {
+        const $coolFormkitEntries = $submenu.find('.cfkef-entries-page-list');
+        if ($coolFormkitEntries.length) {
+            return $coolFormkitEntries;
+        }
+
+        const $coolFormkit = $submenu.find('.cool-formkit-page-list');
+        if ($coolFormkit.length) {
+            return $coolFormkit;
+        }
+
+        return $elementorEditorPage;
+    }
+
+    function addFormsDbAdminPageToElementor() {
+        let $elementorEditorPage = jQuery('.wp-submenu a[href="admin.php?page=elementor"]').closest('li');
+        if (!$elementorEditorPage.length) {
+            return;
+        }
+
+        let $submenu = $elementorEditorPage.closest('ul.wp-submenu');
+        if (!$submenu.length) {
+            return;
+        }
+
+        $submenu.find('.formsdb-page-list').remove();
+        $submenu.find('.fdbgp-entries-page-list').remove();
+
+        const menuLabel = (typeof fdbgp_plugin_vars !== 'undefined' && fdbgp_plugin_vars.formsdbMenuLabel)
+            ? fdbgp_plugin_vars.formsdbMenuLabel
+            : 'FormsDB';
+        const showEntries = typeof fdbgp_plugin_vars !== 'undefined' && fdbgp_plugin_vars.showEntries;
+        const hasCoolFormkitEntries = $submenu.find('.cfkef-entries-page-list').length > 0;
+
+        let $formsDbItem = jQuery('<li class="formsdb-page-list"><a href="admin.php?page=formsdb">' + menuLabel + '</a></li>');
+        let $formsDbEntriesItem = jQuery('<li class="fdbgp-entries-page-list"><a href="admin.php?page=cfkef-entries">↳ Entries</a></li>');
+        const $anchor = getFormsDbInsertAnchor($submenu, $elementorEditorPage);
+
+        if ($submenu.find('a[href="admin.php?page=elementor-one-upgrade"]').length > 0) {
+            $anchor.after($formsDbItem);
+
+            if (showEntries && !hasCoolFormkitEntries) {
+                $formsDbItem.after($formsDbEntriesItem);
+            }
+        } else {
+            if ($anchor.is($elementorEditorPage)) {
+                $submenu.append($formsDbItem);
+            } else {
+                $anchor.after($formsDbItem);
+            }
+
+            if (showEntries && !hasCoolFormkitEntries) {
+                $formsDbItem.after($formsDbEntriesItem);
+            }
+        }
+    }
+
+    addFormsDbAdminPageToElementor();
+    setTimeout(addFormsDbAdminPageToElementor, 0);
+
+    document.addEventListener('cfkef_dashboard_toggle:settings:changed', function () {
+        addFormsDbAdminPageToElementor();
+    });
+
     function handleTermLink() {
         const termsLinks = document.querySelectorAll('.fdbgp-ccpw-see-terms');
         const termsBox = document.getElementById('termsBox');

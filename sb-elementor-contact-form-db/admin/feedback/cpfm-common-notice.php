@@ -32,11 +32,10 @@ class CPFM_Feedback_Notice {
                 'always_show_on' => [],
             ]);
         }
-        if(!isset(self::$registered_notices[$key]['plugins'])){
-            self::$registered_notices[$key]['plugins'] = array();
+        if ( ! isset( self::$registered_notices[ $key ]['plugins'] ) ) {
+            self::$registered_notices[ $key ]['plugins'] = array();
         }
-        
-        self::$registered_notices[$key]['plugins'][] = $args;
+        self::$registered_notices[ $key ]['plugins'][] = $args;
     }
     
     public function cpfm_listen_for_external_notice_registration() {
@@ -137,16 +136,14 @@ class CPFM_Feedback_Notice {
         $category           = isset($_POST['category']) ? sanitize_text_field( wp_unslash( $_POST['category'] ) ): '';
         $opt_in_raw         = isset($_POST['opt_in']) ? sanitize_text_field( wp_unslash( $_POST['opt_in'] ) ) : '';
         $opt_in             = ($opt_in_raw === 'yes') ? 'yes' : 'no';
-        $category_notices   = self::$registered_notices;
-        $registered_notices = isset($GLOBALS['cool_plugins_feedback'])? $GLOBALS['cool_plugins_feedback']:$category_notices;
 
         if (!$category || !isset(self::$registered_notices[$category])) {
 
             wp_send_json_error('Invalid notice category.');
         }
 
-        if(!isset(self::$registered_notices[$category]['plugins'])){
-            wp_send_json_error('Invalid notice category plugins.');
+        if ( ! isset( self::$registered_notices[ $category ]['plugins'] ) ) {
+            wp_send_json_error( 'Invalid notice category plugins.' );
         }
 
         update_option("cpfm_opt_in_choice_{$category}", $opt_in);
@@ -156,7 +153,7 @@ class CPFM_Feedback_Notice {
        
         if ($review_option === 'yes') {
             
-             foreach (self::$registered_notices[$category]['plugins'] as $notice) {
+             foreach ( self::$registered_notices[ $category ]['plugins'] as $notice ) {
 
                     $plugin_name = isset($notice['plugin_name'])?sanitize_key($notice['plugin_name']):'';
 

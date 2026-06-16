@@ -6,7 +6,7 @@ jQuery(document).ready(function ($) {
 		var wrapper = $this.parents(".fdbgp-review-notice-wrapper");
 		var ajaxURL = wrapper.data("ajax-url");
 		var ajaxCallback = wrapper.data("ajax-callback");
-		$.post(ajaxURL, { "action": ajaxCallback }, function (data) {
+		$.post(ajaxURL, { "action": ajaxCallback, "nonce": fdbgpReviewNotice.nonce }, function (data) {
 			wrapper.slideUp("fast");
 		}, "json");
 	});

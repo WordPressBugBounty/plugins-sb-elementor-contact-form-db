@@ -356,7 +356,10 @@ class FDBGP_Form_To_Sheet_Settings {
      */
     private function render_empty_state() {
 
-        $create_form_url = admin_url( 'admin.php?action=fdbgp_create_elementor_page' );
+        $create_form_url = wp_nonce_url(
+            admin_url( 'admin.php?action=fdbgp_create_elementor_page' ),
+            'fdbgp_create_elementor_page'
+        );
         ?>
         <div class="cool-formkit-setting-table-con">
             <div class="cool-formkit-left-side-setting">

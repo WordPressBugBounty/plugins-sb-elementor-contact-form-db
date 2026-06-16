@@ -58,7 +58,7 @@ class FDBGP_List_Table extends WP_List_Table {
         }
 
         // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- View filtering doesn't modify data.
-        $current_view = isset($_GET['view']) ? sanitize_key($_GET['view']) : 'all';
+        $current_view = isset($_GET['view']) ? sanitize_key( wp_unslash( $_GET['view'] ) ) : 'all';
 
         // Get counts for all and trash
         $post_counts = wp_count_posts($this->post_type);
@@ -137,11 +137,11 @@ class FDBGP_List_Table extends WP_List_Table {
 
     public function column_id($item) {
         $entry_id = get_post_meta($item->ID, '_cfkef_form_entry_id', true);
-        return $entry_id;
+        return esc_html($entry_id);
     }
 
     public function column_submission_date($item) {
-        return $item->post_date;
+        return esc_html($item->post_date);
     }
 
     public function column_page_title($item) {
@@ -242,7 +242,7 @@ class FDBGP_List_Table extends WP_List_Table {
 		$order    = isset( $_GET['order'] ) && sanitize_text_field( wp_unslash( $_GET['order'] ) ) === 'asc' ? 'ASC' : 'DESC';
         $search   = isset( $_GET['cfkef-entries-search'] ) ? sanitize_text_field( wp_unslash( $_GET['cfkef-entries-search'] ) ) : '';
 		$allowed_orderby = ['ID','post_title','post_date','post_modified','post_status'];
-        $orderby = isset($_GET['orderby']) ? sanitize_key($_GET['orderby']) : 'ID';
+        $orderby = isset($_GET['orderby']) ? sanitize_key( wp_unslash( $_GET['orderby'] ) ) : 'ID';
         $orderby = in_array($orderby, $allowed_orderby, true) ? $orderby : 'ID';
         $per_page = $this->get_items_per_page( $this->get_per_page_option_name() , 20 );
         $date_filter = isset( $_GET['date_filter'] ) && isset( $_GET['m'] ) && ! empty( $_GET['m'] ) ? sanitize_text_field( wp_unslash( $_GET['m'] ) ) : '';
