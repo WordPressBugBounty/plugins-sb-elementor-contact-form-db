@@ -93,11 +93,6 @@ class FDBGP_Entries_Posts {
      * Add dashboard tab
      */
     public function add_dashboard_tab($tabs) {
-        // $tabs[] = array(
-        //     'title' => 'Entries',
-        //     'position' => 2,
-        //     'slug' => 'cfkef-entries',
-        // );
 
         return $tabs;
     }
@@ -417,11 +412,6 @@ class FDBGP_Entries_Posts {
   
         // Update the form name in post meta
         $form_name = get_post_meta(get_the_ID(), '_cfkef_form_name', true);
-  
-        // Update the element id in post meta
-        $element_id = get_post_meta(get_the_ID(), '_cfkef_element_id', true);
-
-        $post_id= isset($meta['page_url']['value']) ? url_to_postid(isset($meta['page_url']['value'])) : '';
 
         $data=[
             'Form Name' => array('value' => $form_name),

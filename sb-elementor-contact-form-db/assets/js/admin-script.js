@@ -106,8 +106,7 @@ jQuery(document).ready(function ($) {
         if (navigator.clipboard && window.isSecureContext) {
             navigator.clipboard.writeText(text)
                 .then(showCopiedFeedback)
-                .catch(function (err) {
-                    console.log('Clipboard API failed, falling back to execCommand:', err);
+                .catch(function () {
                     fallbackCopy();
                 });
         } else {
@@ -124,7 +123,7 @@ jQuery(document).ready(function ($) {
                 var successful = document.execCommand('copy');
                 if (successful) showCopiedFeedback();
             } catch (err) {
-                console.log('execCommand copy failed: ', err);
+                // Swallow copy failures silently in production.
             }
 
             $temp.remove();

@@ -121,18 +121,4 @@ abstract class FDBGP_Google_API {
 	}
 
 
-	/**
-	 * Clear all values from a range in a Google Sheet.
-	 *
-	 * @param \Google_Service_Sheets          $service  The Google Sheets service instance.
-	 * @param array                          $param    Associative array with keys:
-	 *                                                   - 'spreadsheetid': Spreadsheet ID
-	 *                                                   - 'sheetname': Sheet name or A1 notation range
-	 *                                                   - 'requestbody': ClearValuesRequest object
-	 * @since 1.0.0
-	 * @return \Google_Service_Sheets_ClearValuesResponse Response from the clear operation.
-	 */
-	public function clearsheet( $service, $param ) {
-		return $service->spreadsheets_values->clear( $param['spreadsheetid'], $param['sheetname'], $param['requestbody'] );
-	}
 }

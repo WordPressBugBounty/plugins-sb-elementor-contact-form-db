@@ -424,11 +424,6 @@ class FDBGP_Form_Sheets_Action extends Action_Base {
         // Local variables to replace globals
         $local_spreadsheet_id = '';
         $local_sheet_name     = '';
-        $local_sheet_headers  = array();
-        $local_headers        = array();
-
-        $fdbgp_exclude_headertype = array( 'honeypot', 'recaptcha', 'recaptcha_v3', 'html', 'step' );
-        $fdbgp_sheetheaders       = array();
 
         // Retrieve saved settings from Elementor data
         $fdbgp_document = Plugin::elementor()->documents->get( get_the_ID() );
@@ -438,7 +433,7 @@ class FDBGP_Form_Sheets_Action extends Action_Base {
             
             Plugin::elementor()->db->iterate_data(
                 $fdbgp_data,
-                function ( $element ) use ( &$local_spreadsheet_id, &$local_sheet_name, &$local_sheet_headers, &$local_headers, $widget_id, $fdbgp_exclude_headertype ) {
+                function ( $element ) use ( &$local_spreadsheet_id, &$local_sheet_name, $widget_id ) {
                     if ( isset( $element['id'] ) && (string) $widget_id === (string) $element['id'] ) {
                         if ( isset( $element['settings'][ $this->add_prefix( 'spreadsheetid' ) ] ) ) {
                             $local_spreadsheet_id = $element['settings'][ $this->add_prefix( 'spreadsheetid' ) ];
@@ -446,24 +441,10 @@ class FDBGP_Form_Sheets_Action extends Action_Base {
                         if ( isset( $element['settings'][ $this->add_prefix( 'sheet_list' ) ] ) ) {
                             $local_sheet_name = $element['settings'][ $this->add_prefix( 'sheet_list' ) ];
                         }
-                        if ( isset( $element['settings'][ $this->add_prefix( 'sheet_headers' ) ] ) ) {
-                            $local_sheet_headers = $element['settings'][ $this->add_prefix( 'sheet_headers' ) ];
-                        }
-                        if ( isset( $element['settings']['form_fields'] ) ) {
-                            foreach ( $element['settings']['form_fields'] as $formdata ) {
-                                if ( ! isset( $formdata['field_type'] ) || ( isset( $formdata['field_type'] ) && ! in_array( $formdata['field_type'], $fdbgp_exclude_headertype, true ) ) ) {
-                                    $local_headers[ $formdata['custom_id'] ] = isset( $formdata['field_label'] ) && $formdata['field_label'] ? $formdata['field_label'] : ucfirst( $formdata['custom_id'] );
-                                }
-                            }
-                        }
                     }
                     return $element;
                 }
             );
-        }
-
-        if ( ! is_array( $fdbgp_sheetheaders ) ) {
-            $fdbgp_sheetheaders = array();
         }
 
         if ( empty( $fdbgp_google_settings['client_token'] ) ) {

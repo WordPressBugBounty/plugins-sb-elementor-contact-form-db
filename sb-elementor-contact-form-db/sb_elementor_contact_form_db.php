@@ -5,7 +5,7 @@
  * Plugin URI:  https://coolplugins.net/product/formsdb-connect-elementor-forms-google-sheets/?utm_source=formsdb&utm_medium=inside&utm_campaign=plugin_page&utm_content=plugins_list
  * Description: Connect Elementor forms with Google Sheets to sync form entries, or save frontend form submissions in any WordPress post type using Elementor Pro or Hello Plus forms.
  * Author:      Cool Plugins
- * Version:     2.1.10
+ * Version:     2.1.11
  * Author URI:  https://coolplugins.net/?utm_source=formsdb&utm_medium=inside&utm_campaign=author_page&utm_content=plugins_list
  * Text Domain: sb-elementor-contact-form-db
  * Requires Plugins: elementor
@@ -26,7 +26,7 @@ define( 'FDBGP_PLUGIN_FILE', __FILE__ );
 define( 'FDBGP_PLUGIN_BASENAME', plugin_basename( FDBGP_PLUGIN_FILE ) );
 define( 'FDBGP_PLUGIN_DIR', plugin_dir_path( FDBGP_PLUGIN_FILE ) );
 define( 'FDBGP_PLUGIN_URL', plugin_dir_url( FDBGP_PLUGIN_FILE ) );
-define( 'FDBGP_PLUGIN_VERSION', '2.1.10' );
+define( 'FDBGP_PLUGIN_VERSION', '2.1.11' );
 define('FDBGP_FEEDBACK_URL', 'https://feedback.coolplugins.net/');
 
 
@@ -207,36 +207,21 @@ if(!class_exists('FDBGP_Main')) {
 			if ( 0 !== strpos( $class_name, __NAMESPACE__ ) ) {
 				return;
 			}
-			$has_class_alias = isset( $this->classes_aliases[ $class_name ] );
 
-			// Backward Compatibility: Save old class name for set an alias after the new class is loaded
-			if ( $has_class_alias ) {
-				$class_alias_name = $this->classes_aliases[ $class_name ];
-				$class_to_load = $class_alias_name;
-			} else {
-				$class_to_load = $class_name;
-			}
-			
-			if ( ! class_exists( $class_to_load ) ) {
+			if ( ! class_exists( $class_name ) ) {
 				$filename = strtolower(
 					preg_replace(
 						[ '/^' . __NAMESPACE__ . '\\\/', '/([a-z])([A-Z])/', '/_/', '/\\\/' ],
 						[ '', '$1-$2', '-', DIRECTORY_SEPARATOR ],
-						$class_to_load
+						$class_name
 					)
 				);
 
-
 				$filename = trailingslashit( FDBGP_PLUGIN_DIR ) . $filename . '.php';
-
 
 				if ( is_readable( $filename ) ) {
 					include $filename;
 				}
-			}
-
-			if ( $has_class_alias ) {
-				class_alias( $class_alias_name, $class_name );
 			}
 		}
 

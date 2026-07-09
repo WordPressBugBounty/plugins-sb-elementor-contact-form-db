@@ -28,60 +28,9 @@ class FDBGP_Old_Submission {
      * Constructor
      */
     private function __construct() {
-        // Init hooks
-        add_action('init', array($this, 'init_hooks'));
         add_action('admin_init', array($this, 'handle_csv_download'));
         add_action('admin_init', array($this, 'handle_actions'));
         add_action('elementor_pro/forms/new_record', array($this, 'save_legacy_record'), 10, 2);
-    }
-
-    /**
-     * Initialize hooks and post type
-     */
-    public function init_hooks() {
-        // Register post type if not exists (it might be registered by old plugin if active, but we should ensure it exists)
-        // $this->register_post_type();
-    }
-
-    /**
-     * Register Custom Post Type for Legacy Submissions
-     */
-    private function register_post_type() {
-        if (!post_type_exists('elementor_cf_db')) {
-            $labels = array(
-                'name'               => _x( 'Elementor DB', 'post type general name', 'sb-elementor-contact-form-db' ),
-                'singular_name'      => _x( 'Elementor DB', 'post type singular name', 'sb-elementor-contact-form-db' ),
-                'menu_name'          => _x( 'Elementor DB', 'admin menu', 'sb-elementor-contact-form-db' ),
-                'name_admin_bar'     => _x( 'Elementor DB', 'add new on admin bar', 'sb-elementor-contact-form-db' ),
-                'add_new'            => _x( 'Add New', 'elementor_cf_db', 'sb-elementor-contact-form-db' ),
-                'add_new_item'       => __( 'Add New Submission', 'sb-elementor-contact-form-db' ),
-                'new_item'           => __( 'New Submission', 'sb-elementor-contact-form-db' ),
-                'edit_item'          => __( 'Edit Submission', 'sb-elementor-contact-form-db' ),
-                'view_item'          => __( 'View Submission', 'sb-elementor-contact-form-db' ),
-                'all_items'          => __( 'All Submissions', 'sb-elementor-contact-form-db' ),
-                'search_items'       => __( 'Search Submissions', 'sb-elementor-contact-form-db' ),
-                'parent_item_colon'  => __( 'Parent Submissions:', 'sb-elementor-contact-form-db' ),
-                'not_found'          => __( 'No submissions found.', 'sb-elementor-contact-form-db' ),
-                'not_found_in_trash' => __( 'No submissions found in Trash.', 'sb-elementor-contact-form-db' )
-            );
-    
-            $args = array(
-                'labels'             => $labels,
-                'public'             => false,
-                'publicly_queryable' => false,
-                'show_ui'            => false, // We use our own UI
-                'show_in_menu'       => false,
-                'query_var'          => true,
-                'rewrite'            => array( 'slug' => 'elementor_cf_db' ),
-                'capability_type'    => 'post',
-                'has_archive'        => true,
-                'hierarchical'       => false,
-                'menu_position'      => null,
-                'supports'           => array( 'title', 'editor', 'author' )
-            );
-    
-            register_post_type( 'elementor_cf_db', $args );
-        }
     }
 
     /**
@@ -132,13 +81,6 @@ class FDBGP_Old_Submission {
             update_post_meta($post_id, 'sb_elem_cfd', $meta);
             update_post_meta($post_id, 'sb_elem_cfd_form_id', $form_name);
             update_post_meta($post_id, 'sb_elem_cfd_submitted_on_id', get_the_ID());
-            
-            // Add read status
-            $read = array(
-                'by_name' => '',
-                'by' => 0,
-                'on' => 0
-            );
             update_post_meta($post_id, 'sb_elem_cfd_read', 0); // 0 means unread
         }
     }

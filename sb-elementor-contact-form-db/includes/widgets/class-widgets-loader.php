@@ -4,8 +4,6 @@ if (!defined('ABSPATH')) {
     die;
 }
 
-use ElementorPro\Plugin;
-
 
 class FDBGP_Widgets_Loader {
 

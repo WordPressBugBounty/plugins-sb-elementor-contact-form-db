@@ -437,18 +437,6 @@ class FDBGP_Google_API_Functions extends FDBGP_Google_API {
 	}
 
 	/**
-	 * Create Google_Service_Sheets_ClearValuesRequest Object
-	 *
-	 * @since 1.0.0
-	 *
-	 * @return object.
-	 */
-	public function clearobject() {
-		$requestbody = new \Google\Service\Sheets\ClearValuesRequest();
-		return $requestbody;
-	}
-
-	/**
 	 * Format google sheet.
 	 *
 	 * @param array $param contains spreadsheetid, requestbody, params.
@@ -494,17 +482,5 @@ class FDBGP_Google_API_Functions extends FDBGP_Google_API {
 	 */
 	public function createspreadsheet( $requestbody = array() ) {
 		return parent::create_spreadsheet( self::$instance_service, $requestbody );
-	}
-
-	/**
-	 * Clear Google Sheet.
-	 *
-	 * @param array $param contains spreadsheetid, range, requestbody, params.
-	 * @since 1.0.0
-	 *
-	 * @return object.
-	 */
-	public function clear( $param = array() ) {
-		return parent::clearsheet( self::$instance_service, $param );
 	}
 }

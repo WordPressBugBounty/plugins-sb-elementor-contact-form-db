@@ -19,8 +19,6 @@ class FDBGP_List_Table extends WP_List_Table {
 
     private $cfkef_bulk_actions;
 
-    private $bulk_actions;
-
     public static function get_instance($post_type) {
         if (null === self::$instance) {
             self::$instance = new self($post_type);
@@ -154,10 +152,6 @@ class FDBGP_List_Table extends WP_List_Table {
         }
 
         return esc_html($value);
-    }
-    
-    public function column_actions($item) {
-        return sprintf('<a href="%s" class="button button-primary">View</a>', esc_url($item->ID));
     }
 
     protected function handle_row_actions( $item, $column_name, $primary ) {

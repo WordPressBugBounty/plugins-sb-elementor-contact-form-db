@@ -147,10 +147,7 @@ if (!class_exists('fdbgp_cronjob')) {
                   if (is_wp_error($response)) {
                     return;
                   }
-              
-                  $response_body = wp_remote_retrieve_body($response);
-                  $decoded = json_decode($response_body, true);
-                
+
                   if (!wp_next_scheduled('fdbgp_extra_data_update')) {
                     wp_schedule_event(time(), 'every_30_days', 'fdbgp_extra_data_update');
                 }
