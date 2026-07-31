@@ -5,11 +5,11 @@ Tags: elementor forms, google sheets, form submissions, contact form db, form en
 Requires at least: 5.0
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 2.1.11
+Stable tag: 2.1.12
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
-Elementor tested up to: 4.1.3
-Elementor Pro tested up to: 4.1.1
+Elementor tested up to: 4.2.1
+Elementor Pro tested up to: 4.2.1
 
 Connect Elementor forms with Google Sheets to sync form entries, or save form submissions in any post type using Elementor Pro or Hello Plus forms.
 
@@ -209,6 +209,9 @@ https://youtu.be/CV3ZtcOVWzU
 👉 [FormsDB Video Tutorials](https://docs.coolplugins.net/doc/formsdb-video-tutorials/?utm_source=formsdb&utm_medium=readme&utm_campaign=docs&utm_content=installation)
 
 == Changelog ==
+
+= 2.1.12 (Jul 31, 2026) =
+* Tested up to Elementor 4.2.1 and Elementor Pro 4.2.1.
 
 = 2.1.11 (Jul 09, 2026) =
 * Improved Plugin code quality.
